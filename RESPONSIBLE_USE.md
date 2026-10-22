@@ -8,7 +8,7 @@ PlayFellow is research on game-playing AI that sees a screen and presses keys, b
 - **Fair play.** Not for cheating against other players, and not for automating online or multiplayer games against their terms.
 - **Adults only.** PlayFellow products are for people aged 18 and over.
 
-These are **binding** for this code: they are Attachment A of the [LICENSE](LICENSE), and every copy and derivative must carry them.
+The binding terms are in the [LICENSE](LICENSE).
 
 ## Safety built into the code
 - **F12**, or moving the mouse to the top-left corner, stops everything at once and releases held keys.

@@ -81,7 +81,7 @@ During the Meta Global AI Developer Hackathon (26 October to 4 November 2026) th
 
 ## Responsible use and licence
 
-PlayFellow is openly licensed under a **Responsible AI License (OpenRAIL-S)** whose use restrictions are binding (Attachment A of the [LICENSE](LICENSE)): **no military or warfare use, no weapons, no violence against people, no surveillance, no cheating against other players, and no products aimed at minors.** Because of those restrictions it is not an OSI "open source" licence. See also [RESPONSIBLE_USE.md](RESPONSIBLE_USE.md), [TRADEMARKS.md](TRADEMARKS.md), [NOTICE.md](NOTICE.md) and [SECURITY.md](SECURITY.md).
+See [LICENSE](LICENSE) and [RESPONSIBLE_USE.md](RESPONSIBLE_USE.md); also [TRADEMARKS.md](TRADEMARKS.md), [NOTICE.md](NOTICE.md) and [SECURITY.md](SECURITY.md).
 
 ## Acknowledgements
 

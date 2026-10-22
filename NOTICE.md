@@ -1,8 +1,6 @@
 # Notice
 
-PlayFellow research core. Copyright (c) 2026 Hesham Aboul-Fetouh. Licensed under the PlayFellow Responsible AI License (OpenRAIL-S); see [LICENSE](LICENSE).
-
-The licence text is adapted from the AI Pubs Open RAIL-S License v0.1 by the Responsible AI Licenses initiative (https://www.licenses.ai/), used under CC BY 4.0.
+PlayFellow research core. Copyright (c) 2026 Hesham Aboul-Fetouh. See [LICENSE](LICENSE).
 
 ## Acknowledgements
 Inspired by research such as Google DeepMind's SIMA 2 and NVIDIA's NitroGen. No code, weights or data from either is used, and there is no affiliation or endorsement.
