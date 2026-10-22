@@ -1,0 +1,43 @@
+# Hollow Knight (PC) - default keyboard controls.
+# Source: https://hollowknight.wiki.fextralife.com/Controls (Hollow Knight Wiki - Controls, keyboard defaults);
+#         also listed at https://defkey.com/hollow-knight-shortcuts
+# Arrows move/look; Z jump (hold for higher); X attack (up/down + X strikes up/down); A focus (hold) / cast (tap);
+# C dash; S super dash (Crystal Heart); D dream nail; I inventory; Tab quick map; Esc pause.
+name: Hollow Knight
+name_ar: هولو نايت
+genre: metroidvania
+window: hollow knight
+default_goal: Explore, defeat enemies, find the next area or upgrade, and rest at benches to save.
+default_goal_ar: استكشف، اهزم الأعداء، واعثر على المنطقة أو الترقية التالية، واسترح على المقاعد لتحفظ.
+game_hint: >
+  A 2D metroidvania. You are the small knight with a nail (sword). Top-left HUD: white masks are your health; the
+  round vessel fills with Soul when you hit enemies. Hold A to Focus (spend Soul to heal one mask while standing
+  still); tap A to cast a spell once you have one. Geo (money) shows under the masks. Benches save and refill
+  health. Locked paths usually need an ability found elsewhere: remember them and come back later.
+game_hint_ar: >
+  لعبة ميترويدفينيا ثنائية الأبعاد. أنت الفارس الصغير ذو السيف. في الأعلى يسارًا: الأقنعة البيضاء صحتك؛ والوعاء الدائري
+  يمتلئ بالروح عندما تضرب الأعداء. اضغط مطولًا على A للتركيز (تنفق الروح لتشفي قناعًا وأنت ثابت)؛ واضغط A مرة لإلقاء تعويذة
+  عندما تملكها. المال (جيو) تحت الأقنعة. المقاعد تحفظ اللعبة وتعيد الصحة. الطرق المغلقة تحتاج غالبًا قدرة من مكان آخر: تذكّرها وعُد لاحقًا.
+actions:
+  LEFT:        {keys: left,  hold: 0.12, says: "walk left", says_ar: "امشِ لليسار"}
+  RIGHT:       {keys: right, hold: 0.12, says: "walk right", says_ar: "امشِ لليمين"}
+  LOOK_UP:     {keys: up,    hold: 0.3,  says: "look up", says_ar: "انظر لأعلى"}
+  LOOK_DOWN:   {keys: down,  hold: 0.3,  says: "look down", says_ar: "انظر لأسفل"}
+  JUMP:        {keys: z,     hold: 0.12, says: "short jump", says_ar: "قفزة قصيرة"}
+  HIGH_JUMP:   {keys: z,     hold: 0.45, says: "high jump (hold jump longer)", says_ar: "قفزة عالية (اضغط القفز أطول)"}
+  ATTACK:      {keys: x,     hold: 0.06, says: "swing the nail", says_ar: "اضرب بالسيف"}
+  ATTACK_UP:   {keys: [up, x],   hold: 0.08, says: "strike upwards", says_ar: "اضرب لأعلى"}
+  ATTACK_DOWN: {keys: [down, x], hold: 0.08, says: "strike downwards (in the air it bounces you off spikes and enemies)", says_ar: "اضرب لأسفل (في الهواء ترتد عن الأشواك والأعداء)"}
+  DASH:        {keys: c,     hold: 0.06, says: "dash (once you have the Mothwing Cloak)", says_ar: "اندفع (عندما تملك عباءة جناح العثة)"}
+  FOCUS_HEAL:  {keys: a,     hold: 1.4,  says: "focus: heal one mask (costs Soul; stand still)", says_ar: "ركّز: اشفِ قناعًا (يكلّف روحًا؛ ابقَ ثابتًا)"}
+  CAST:        {keys: a,     hold: 0.06, says: "cast a spell (when you have one)", says_ar: "ألقِ تعويذة (عندما تملكها)"}
+  SUPER_DASH:  {keys: s,     hold: 1.0,  says: "super dash (once you have Crystal Heart)", says_ar: "اندفاع خارق (عندما تملك قلب الكريستال)"}
+  DREAM_NAIL:  {keys: d,     hold: 0.8,  says: "dream nail (once you have it)", says_ar: "سيف الحلم (عندما تملكه)"}
+  RUN_RIGHT:   {hold_start: right, says: "keep walking right", says_ar: "استمر في المشي لليمين"}
+  RUN_LEFT:    {hold_start: left,  says: "keep walking left", says_ar: "استمر في المشي لليسار"}
+  STOP_RIGHT:  {hold_stop: right,  says: "stop walking right", says_ar: "توقف عن المشي لليمين"}
+  STOP_LEFT:   {hold_stop: left,   says: "stop walking left", says_ar: "توقف عن المشي لليسار"}
+  RELEASE_ALL: {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  QUICK_MAP:   {keys: tab, hold: 0.8, says: "peek at the map", says_ar: "ألقِ نظرة على الخريطة"}
+  INVENTORY:   {keys: i,   hold: 0.06, says: "open or close the inventory", says_ar: "افتح الحقيبة أو أغلقها"}
+  WAIT:        {wait: 0.4, says: "wait and watch the enemy", says_ar: "انتظر وراقب العدو"}

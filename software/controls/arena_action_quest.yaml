@@ -1,0 +1,26 @@
+name: PlayFellow Arena · Action Quest
+name_ar: ساحة بلاي فيلو · مهمة الحركة
+genre: action_rpg
+game_hint: >
+  A boss fight seen from above. You are the purple circle (the white line shows which way you face); the orange block
+  is the boss, with its health bar above it. The boss always warns you: red squares mean it is about to hit there
+  (around itself for a slam, or a straight lane for a charge), and it has a white outline while winding up.
+  Step out of the red squares, or dodge-roll with L (you can't be hurt while rolling; it moves you 2 squares the way
+  you face). Next to the boss: J is a quick light attack, K a heavy attack that hits a moment later. The boss is open
+  for a moment after each attack. Attacks and rolls use stamina, which refills. E drinks a potion (3).
+game_hint_ar: >
+  قتال زعيم نراه من الأعلى. أنت الدائرة البنفسجية (الخط الأبيض يبيّن اتجاهك)؛ والمربع البرتقالي هو الزعيم وفوقه شريط صحته.
+  الزعيم ينذرك دائمًا: المربعات الحمراء تعني أنه على وشك الضرب هناك (حوله في الضربة الأرضية، أو في خط مستقيم عند الاندفاع)،
+  ويكون له إطار أبيض وهو يستعد. اخرج من المربعات الحمراء، أو تدحرج بـ L (لا يمكن إيذاؤك وأنت تتدحرج؛ يحركك مربعين في
+  اتجاهك). بجانب الزعيم: J هجوم خفيف سريع، وK هجوم ثقيل يصيب بعد لحظة. الزعيم مكشوف لحظة بعد كل هجوم.
+  الهجمات والتدحرج تستهلك التحمل الذي يمتلئ من جديد. E تشرب جرعة (3).
+actions:
+  UP:     {keys: w, hold: 0.05, says: "move up", says_ar: "تحرك لأعلى"}
+  LEFT:   {keys: a, hold: 0.05, says: "move left", says_ar: "تحرك لليسار"}
+  DOWN:   {keys: s, hold: 0.05, says: "move down", says_ar: "تحرك لأسفل"}
+  RIGHT:  {keys: d, hold: 0.05, says: "move right", says_ar: "تحرك لليمين"}
+  LIGHT:  {keys: j, hold: 0.05, says: "light attack (quick)", says_ar: "هجوم خفيف (سريع)"}
+  HEAVY:  {keys: k, hold: 0.05, says: "heavy attack (hits a moment later)", says_ar: "هجوم ثقيل (يصيب بعد لحظة)"}
+  ROLL:   {keys: l, hold: 0.05, says: "dodge-roll the way you face", says_ar: "تدحرج في اتجاهك"}
+  POTION: {keys: e, hold: 0.05, says: "drink a potion", says_ar: "اشرب جرعة"}
+  WAIT:   {wait: 0.1, says: "wait", says_ar: "انتظر"}

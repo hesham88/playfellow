@@ -1,0 +1,13 @@
+name: Racing
+name_ar: سباق
+genre: racing
+game_hint: >
+  A driving game. Hold up to speed up, down to brake, and steer left or right. Change the keys to match your game.
+game_hint_ar: >
+  لعبة قيادة. اضغط السهم لأعلى لتزيد السرعة وللأسفل لتبطئ، وانعطف يسارًا أو يمينًا. غيّر الأزرار لتناسب لعبتك.
+actions:
+  GAS:         {keys: up, hold: 0.6, says: "speed up", says_ar: "زد السرعة"}
+  BRAKE:       {keys: down, hold: 0.4, says: "slow down", says_ar: "خفف السرعة"}
+  STEER_LEFT:  {keys: [up, left], hold: 0.4, says: "drive and turn left", says_ar: "قد وانعطف لليسار"}
+  STEER_RIGHT: {keys: [up, right], hold: 0.4, says: "drive and turn right", says_ar: "قد وانعطف لليمين"}
+  WAIT:        {wait: 0.3, says: "let go of the keys", says_ar: "اترك الأزرار"}

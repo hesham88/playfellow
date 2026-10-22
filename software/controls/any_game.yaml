@@ -1,0 +1,412 @@
+name: Any game (keyboard)
+name_ar: أي لعبة (لوحة المفاتيح)
+genre: generic
+game_hint: >
+  Read the on-screen key hints (like [Space] or [Backspace]) and use the matching KEY_ action; arrows move or choose in menus.
+game_hint_ar: >
+  اقرأ تلميحات المفاتيح على الشاشة (مثل [Space] أو [Backspace]) واستخدم الإجراء KEY_ المطابق؛ الأسهم تتحرك أو تختار في القوائم.
+actions:
+  UP:
+    keys: up
+    hold: 0.15
+    says: "press up arrow (hold 0.15 seconds)"
+    says_ar: "اضغط سهم up (اضغط 0.15 ثانية)"
+
+  DOWN:
+    keys: down
+    hold: 0.15
+    says: "press down arrow (hold 0.15 seconds)"
+    says_ar: "اضغط سهم down (اضغط 0.15 ثانية)"
+
+  LEFT:
+    keys: left
+    hold: 0.15
+    says: "press left arrow (hold 0.15 seconds)"
+    says_ar: "اضغط سهم left (اضغط 0.15 ثانية)"
+
+  RIGHT:
+    keys: right
+    hold: 0.15
+    says: "press right arrow (hold 0.15 seconds)"
+    says_ar: "اضغط سهم right (اضغط 0.15 ثانية)"
+
+  HOLD_LEFT:
+    hold_start: left
+    says: "start holding left arrow (keeps it pressed until stopped)"
+    says_ar: "ابدأ الضغط على سهم left (يبقيه مضغوطًا حتى يتوقف)"
+
+  HOLD_RIGHT:
+    hold_start: right
+    says: "start holding right arrow (keeps it pressed until stopped)"
+    says_ar: "ابدأ الضغط على سهم right (يبقيه مضغوطًا حتى يتوقف)"
+
+  STOP_MOVING:
+    release_all: true
+    says: "stop all movement (release all held keys)"
+    says_ar: "أوقف كل الحركة (حرر كل المفاتيح المضغوطة)"
+
+  WAIT:
+    wait: 0.6
+    says: "wait a moment"
+    says_ar: "انتظر لحظة"
+
+  KEY_A:
+    keys: a
+    hold: 0.12
+    says: "press a (check what it does from on-screen hints)"
+    says_ar: "اضغط a (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_B:
+    keys: b
+    hold: 0.12
+    says: "press b (check what it does from on-screen hints)"
+    says_ar: "اضغط b (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_C:
+    keys: c
+    hold: 0.12
+    says: "press c (check what it does from on-screen hints)"
+    says_ar: "اضغط c (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_D:
+    keys: d
+    hold: 0.12
+    says: "press d (check what it does from on-screen hints)"
+    says_ar: "اضغط d (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_E:
+    keys: e
+    hold: 0.12
+    says: "press e (check what it does from on-screen hints)"
+    says_ar: "اضغط e (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F:
+    keys: f
+    hold: 0.12
+    says: "press f (check what it does from on-screen hints)"
+    says_ar: "اضغط f (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_G:
+    keys: g
+    hold: 0.12
+    says: "press g (check what it does from on-screen hints)"
+    says_ar: "اضغط g (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_H:
+    keys: h
+    hold: 0.12
+    says: "press h (check what it does from on-screen hints)"
+    says_ar: "اضغط h (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_I:
+    keys: i
+    hold: 0.12
+    says: "press i (check what it does from on-screen hints)"
+    says_ar: "اضغط i (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_J:
+    keys: j
+    hold: 0.12
+    says: "press j (check what it does from on-screen hints)"
+    says_ar: "اضغط j (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_K:
+    keys: k
+    hold: 0.12
+    says: "press k (check what it does from on-screen hints)"
+    says_ar: "اضغط k (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_L:
+    keys: l
+    hold: 0.12
+    says: "press l (check what it does from on-screen hints)"
+    says_ar: "اضغط l (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_M:
+    keys: m
+    hold: 0.12
+    says: "press m (check what it does from on-screen hints)"
+    says_ar: "اضغط m (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_N:
+    keys: n
+    hold: 0.12
+    says: "press n (check what it does from on-screen hints)"
+    says_ar: "اضغط n (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_O:
+    keys: o
+    hold: 0.12
+    says: "press o (check what it does from on-screen hints)"
+    says_ar: "اضغط o (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_P:
+    keys: p
+    hold: 0.12
+    says: "press p (check what it does from on-screen hints)"
+    says_ar: "اضغط p (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_Q:
+    keys: q
+    hold: 0.12
+    says: "press q (check what it does from on-screen hints)"
+    says_ar: "اضغط q (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_R:
+    keys: r
+    hold: 0.12
+    says: "press r (check what it does from on-screen hints)"
+    says_ar: "اضغط r (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_S:
+    keys: s
+    hold: 0.12
+    says: "press s (check what it does from on-screen hints)"
+    says_ar: "اضغط s (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_T:
+    keys: t
+    hold: 0.12
+    says: "press t (check what it does from on-screen hints)"
+    says_ar: "اضغط t (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_U:
+    keys: u
+    hold: 0.12
+    says: "press u (check what it does from on-screen hints)"
+    says_ar: "اضغط u (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_V:
+    keys: v
+    hold: 0.12
+    says: "press v (check what it does from on-screen hints)"
+    says_ar: "اضغط v (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_W:
+    keys: w
+    hold: 0.12
+    says: "press w (check what it does from on-screen hints)"
+    says_ar: "اضغط w (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_X:
+    keys: x
+    hold: 0.12
+    says: "press x (check what it does from on-screen hints)"
+    says_ar: "اضغط x (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_Y:
+    keys: y
+    hold: 0.12
+    says: "press y (check what it does from on-screen hints)"
+    says_ar: "اضغط y (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_Z:
+    keys: z
+    hold: 0.12
+    says: "press z (check what it does from on-screen hints)"
+    says_ar: "اضغط z (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_0:
+    keys: "0"
+    hold: 0.12
+    says: "press 0 (check what it does from on-screen hints)"
+    says_ar: "اضغط 0 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_1:
+    keys: "1"
+    hold: 0.12
+    says: "press 1 (check what it does from on-screen hints)"
+    says_ar: "اضغط 1 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_2:
+    keys: "2"
+    hold: 0.12
+    says: "press 2 (check what it does from on-screen hints)"
+    says_ar: "اضغط 2 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_3:
+    keys: "3"
+    hold: 0.12
+    says: "press 3 (check what it does from on-screen hints)"
+    says_ar: "اضغط 3 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_4:
+    keys: "4"
+    hold: 0.12
+    says: "press 4 (check what it does from on-screen hints)"
+    says_ar: "اضغط 4 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_5:
+    keys: "5"
+    hold: 0.12
+    says: "press 5 (check what it does from on-screen hints)"
+    says_ar: "اضغط 5 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_6:
+    keys: "6"
+    hold: 0.12
+    says: "press 6 (check what it does from on-screen hints)"
+    says_ar: "اضغط 6 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_7:
+    keys: "7"
+    hold: 0.12
+    says: "press 7 (check what it does from on-screen hints)"
+    says_ar: "اضغط 7 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_8:
+    keys: "8"
+    hold: 0.12
+    says: "press 8 (check what it does from on-screen hints)"
+    says_ar: "اضغط 8 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_9:
+    keys: "9"
+    hold: 0.12
+    says: "press 9 (check what it does from on-screen hints)"
+    says_ar: "اضغط 9 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F1:
+    keys: f1
+    hold: 0.12
+    says: "press f1 (check what it does from on-screen hints)"
+    says_ar: "اضغط f1 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F2:
+    keys: f2
+    hold: 0.12
+    says: "press f2 (check what it does from on-screen hints)"
+    says_ar: "اضغط f2 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F3:
+    keys: f3
+    hold: 0.12
+    says: "press f3 (check what it does from on-screen hints)"
+    says_ar: "اضغط f3 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F4:
+    keys: f4
+    hold: 0.12
+    says: "press f4 (check what it does from on-screen hints)"
+    says_ar: "اضغط f4 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F5:
+    keys: f5
+    hold: 0.12
+    says: "press f5 (check what it does from on-screen hints)"
+    says_ar: "اضغط f5 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F6:
+    keys: f6
+    hold: 0.12
+    says: "press f6 (check what it does from on-screen hints)"
+    says_ar: "اضغط f6 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F7:
+    keys: f7
+    hold: 0.12
+    says: "press f7 (check what it does from on-screen hints)"
+    says_ar: "اضغط f7 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F8:
+    keys: f8
+    hold: 0.12
+    says: "press f8 (check what it does from on-screen hints)"
+    says_ar: "اضغط f8 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F10:
+    keys: f10
+    hold: 0.12
+    says: "press f10 (check what it does from on-screen hints)"
+    says_ar: "اضغط f10 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_F11:
+    keys: f11
+    hold: 0.12
+    says: "press f11 (check what it does from on-screen hints)"
+    says_ar: "اضغط f11 (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_SPACE:
+    keys: space
+    hold: 0.12
+    says: "press space (check what it does from on-screen hints)"
+    says_ar: "اضغط space (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_ENTER:
+    keys: enter
+    hold: 0.12
+    says: "press enter (check what it does from on-screen hints)"
+    says_ar: "اضغط enter (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_SHIFT:
+    keys: shift
+    hold: 0.12
+    says: "press shift (check what it does from on-screen hints)"
+    says_ar: "اضغط shift (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_CTRL:
+    keys: ctrl
+    hold: 0.12
+    says: "press ctrl (check what it does from on-screen hints)"
+    says_ar: "اضغط ctrl (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_ALT:
+    keys: alt
+    hold: 0.12
+    says: "press alt (check what it does from on-screen hints)"
+    says_ar: "اضغط alt (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_TAB:
+    keys: tab
+    hold: 0.12
+    says: "press tab (check what it does from on-screen hints)"
+    says_ar: "اضغط tab (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_ESC:
+    keys: esc
+    hold: 0.12
+    says: "press esc (check what it does from on-screen hints)"
+    says_ar: "اضغط esc (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_BACKSPACE:
+    keys: backspace
+    hold: 0.12
+    says: "press backspace (check what it does from on-screen hints)"
+    says_ar: "اضغط backspace (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_PAGEUP:
+    keys: pageup
+    hold: 0.12
+    says: "press pageup (check what it does from on-screen hints)"
+    says_ar: "اضغط pageup (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_PAGEDOWN:
+    keys: pagedown
+    hold: 0.12
+    says: "press pagedown (check what it does from on-screen hints)"
+    says_ar: "اضغط pagedown (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_HOME:
+    keys: home
+    hold: 0.12
+    says: "press home (check what it does from on-screen hints)"
+    says_ar: "اضغط home (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_END:
+    keys: end
+    hold: 0.12
+    says: "press end (check what it does from on-screen hints)"
+    says_ar: "اضغط end (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_INSERT:
+    keys: insert
+    hold: 0.12
+    says: "press insert (check what it does from on-screen hints)"
+    says_ar: "اضغط insert (تحقق ماذا يفعل من التلميحات على الشاشة)"
+
+  KEY_DELETE:
+    keys: delete
+    hold: 0.12
+    says: "press delete (check what it does from on-screen hints)"
+    says_ar: "اضغط delete (تحقق ماذا يفعل من التلميحات على الشاشة)"
+

@@ -1,0 +1,26 @@
+# Subway Surfers (PC: the browser version on Poki) - default keyboard controls.
+# Source: https://poki.com/en/g/subway-surfers (Poki game page, "Controls": arrows to move/jump/roll, Space hoverboard).
+# There is no native Windows release; on PC it is played in a browser tab (Poki). NOTE for the supervisor:
+# games.py blocks browser windows, so this tab needs an allow rule (like the chess.com one) before live play.
+name: Subway Surfers
+name_ar: صب واي سيرفرز
+genre: endless_runner
+window: subway surfers
+default_goal: Run as far as you can and collect coins - dodge trains and barriers by changing lanes, jumping and rolling.
+default_goal_ar: اركض أبعد ما يمكن واجمع العملات - تفادَ القطارات والحواجز بتغيير المسار والقفز والتدحرج.
+game_hint: >
+  An endless runner seen from behind the runner, on three lanes (left, middle, right). Trains and barriers come
+  towards you. Left/right change lane, up jumps (over low barriers), down rolls (under high barriers). Coins in a
+  line show a safe path. The score and coin count are at the top; the run ends when you crash into something.
+  Space uses a hoverboard (if you have one): it saves you from one crash.
+game_hint_ar: >
+  لعبة جري لا تنتهي نراها من خلف العدّاء، على ثلاثة مسارات (يسار، وسط، يمين). القطارات والحواجز تأتي نحوك. اليسار/اليمين
+  لتغيير المسار، والأعلى للقفز (فوق الحواجز المنخفضة)، والأسفل للتدحرج (تحت الحواجز العالية). العملات المصطفة تدل على طريق آمن.
+  النقاط وعدد العملات في الأعلى؛ والجري ينتهي عندما تصطدم بشيء. المسافة تستخدم لوح التزلج الطائر (إن وُجد): ينقذك من اصطدام واحد.
+actions:
+  LEFT:       {keys: left,  hold: 0.05, says: "move one lane left", says_ar: "انتقل مسارًا لليسار"}
+  RIGHT:      {keys: right, hold: 0.05, says: "move one lane right", says_ar: "انتقل مسارًا لليمين"}
+  JUMP:       {keys: up,    hold: 0.05, says: "jump", says_ar: "اقفز"}
+  ROLL:       {keys: down,  hold: 0.05, says: "roll under", says_ar: "تدحرج من تحت"}
+  HOVERBOARD: {keys: space, hold: 0.05, says: "use a hoverboard", says_ar: "استخدم لوح التزلج الطائر"}
+  WAIT:       {wait: 0.1, says: "keep running in this lane", says_ar: "استمر في الجري في هذا المسار"}

@@ -1,0 +1,27 @@
+# Chess.com "Play Bots" (browser) - mouse controls.
+# Sources: https://support.chess.com/en/articles/8614091-how-can-i-play-against-the-chess-com-bots (Play > Play Bots);
+#          moves are made by clicking a piece and then its target square (or dragging) on the board.
+# BOTS ONLY: an owner-approved online exception (it needs the internet) - never games against people, never rated
+# or live play. The rule below is read by the buddy and also repeated in its system prompt.
+name: Chess.com Play Bots
+name_ar: تشيس.كوم ضد الروبوتات
+genre: board
+window: chess.com
+play_only_against: computer_bots
+stop_if: a game against a person (a username with a rating, two running clocks, "Play Online", "Rated") is on screen
+default_goal: Beat the Chess.com bot - protect your king, don't give pieces away, and look for checkmate.
+default_goal_ar: اهزم روبوت تشيس.كوم - احمِ ملكك، ولا تخسر قطعًا مجانًا، وابحث عن كش مات.
+game_hint: >
+  A chess board in a browser tab, on Chess.com's Play Bots page. You play against a computer bot: the opponent panel
+  shows the bot's cartoon picture and name and it "talks" in a speech bubble. To move, click one of your pieces, then
+  click the square it should go to (legal squares show dots). The move list is on the right.
+  BOTS ONLY: if you see a game against a person - a username with a rating, two clocks counting down, "Play Online"
+  or "Rated" - do not move. Stop and tell the player.
+game_hint_ar: >
+  رقعة شطرنج في تبويب المتصفح، في صفحة "Play Bots" على تشيس.كوم. تلعب ضد روبوت حاسوبي: لوحة الخصم تُظهر صورة الروبوت الكرتونية
+  واسمه، وهو "يتكلم" في فقاعة كلام. لتتحرك، انقر إحدى قطعك ثم انقر المربع الذي يجب أن تذهب إليه (المربعات المسموحة تُظهر نقاطًا).
+  قائمة النقلات على اليمين. ضد الروبوتات فقط: إذا رأيت مباراة ضد شخص - اسم مستخدم مع تصنيف، أو ساعتين تعدّان تنازليًا، أو
+  "Play Online" أو "Rated" - فلا تحرك شيئًا. توقف وأخبر اللاعب.
+actions:
+  CLICK: {click: left, says: "click a square (first your piece, then where it goes)", says_ar: "انقر مربعًا (أولًا قطعتك، ثم مكانها الجديد)"}
+  WAIT:  {wait: 1.0, says: "wait for the bot to move", says_ar: "انتظر حتى يتحرك الروبوت"}

@@ -1,0 +1,22 @@
+name: PlayFellow Arena · Mini Fighter
+name_ar: ساحة بلاي فيلو · المقاتل الصغير
+genre: fighting
+game_hint: >
+  A one-on-one fight seen from the side, against the computer. You are purple; the computer is red. Health bars are
+  at the top (yours on the left) with a yellow special meter under each. Left/right walk. A punches (fast, short
+  reach), S kicks (slower, longer reach, stronger), D blocks (a blocked hit does almost nothing, and the attacker is
+  left open). F is a big special attack once your yellow meter is full. A fighter flashes white when stunned.
+  Block when the red fighter starts an attack close to you, then hit back while it recovers. Win 2 rounds.
+game_hint_ar: >
+  قتال فردي نراه من الجانب ضد الحاسوب. أنت بالبنفسجي؛ والحاسوب بالأحمر. أشرطة الصحة في الأعلى (شريطك على اليسار) وتحت كل
+  منها عداد أصفر للحركة الخاصة. اليسار/اليمين للمشي. A لكمة (سريعة وقصيرة)، S ركلة (أبطأ وأبعد وأقوى)، D صد (الضربة
+  المصدودة لا تفعل شيئًا تقريبًا وتترك المهاجم مكشوفًا). F حركة خاصة قوية عندما يمتلئ عدادك الأصفر. يومض المقاتل بالأبيض
+  عندما يُصعق. اصدّ عندما يبدأ المقاتل الأحمر هجومًا قريبًا منك، ثم اضرب وهو يستعيد توازنه. افز بجولتين.
+actions:
+  LEFT:    {keys: left,  hold: 0.05, says: "walk left", says_ar: "امشِ لليسار"}
+  RIGHT:   {keys: right, hold: 0.05, says: "walk right", says_ar: "امشِ لليمين"}
+  PUNCH:   {keys: a,     hold: 0.05, says: "punch (fast, short reach)", says_ar: "لكمة (سريعة، مدى قصير)"}
+  KICK:    {keys: s,     hold: 0.05, says: "kick (slower, longer reach)", says_ar: "ركلة (أبطأ، مدى أبعد)"}
+  BLOCK:   {keys: d,     hold: 0.05, says: "block", says_ar: "صد"}
+  SPECIAL: {keys: f,     hold: 0.05, says: "special attack (when the meter is full)", says_ar: "حركة خاصة (عندما يمتلئ العداد)"}
+  WAIT:    {wait: 0.1, says: "stand still", says_ar: "قف ثابتًا"}

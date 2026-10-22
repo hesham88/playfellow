@@ -1,0 +1,24 @@
+name: PlayFellow Arena · Mini Football
+name_ar: ساحة بلاي فيلو · كرة القدم المصغرة
+genre: football
+game_hint: >
+  Five-a-side football seen from above. Your team is blue and attacks the goal on the RIGHT; the purple player with
+  the white ring is the one you control (always the one with the ball, or the one nearest it). The red team is the
+  computer; yellow players are the goalkeepers. Walk into the ball to take it, and walk into a red player who has
+  it to try to win it back. Space shoots straight ahead along your row; Z passes forward to a teammate.
+  Keepers are slow: get close to the goal and onto the goal row the keeper is furthest from, then shoot.
+  Win by being 2 goals ahead before the 3 minutes are up.
+game_hint_ar: >
+  كرة قدم خماسية نراها من الأعلى. فريقك أزرق ويهاجم المرمى الأيمن؛ اللاعب البنفسجي ذو الحلقة البيضاء هو الذي تتحكم به
+  (دائمًا من معه الكرة، أو الأقرب إليها). الفريق الأحمر هو الحاسوب؛ واللاعبون الصفر حراس المرمى. امشِ نحو الكرة لتأخذها،
+  وامشِ نحو لاعب أحمر معه الكرة لتحاول استعادتها. المسافة تسدد مباشرة للأمام على صفّك؛ Z يمرر للأمام إلى زميل.
+  الحراس بطيئون: اقترب من المرمى وانتقل إلى صف المرمى الأبعد عن الحارس، ثم سدد.
+  افز بالتقدم بهدفين قبل انتهاء الدقائق الثلاث.
+actions:
+  UP:    {keys: up,    hold: 0.05, says: "move (with the ball) up", says_ar: "تحرك (بالكرة) لأعلى"}
+  DOWN:  {keys: down,  hold: 0.05, says: "move (with the ball) down", says_ar: "تحرك (بالكرة) لأسفل"}
+  LEFT:  {keys: left,  hold: 0.05, says: "move (with the ball) left", says_ar: "تحرك (بالكرة) لليسار"}
+  RIGHT: {keys: right, hold: 0.05, says: "move (with the ball) right, towards their goal", says_ar: "تحرك (بالكرة) لليمين نحو مرماهم"}
+  SHOOT: {keys: space, hold: 0.05, says: "shoot straight ahead", says_ar: "سدد مباشرة للأمام"}
+  PASS:  {keys: z,     hold: 0.05, says: "pass forward to a teammate", says_ar: "مرر للأمام إلى زميل"}
+  WAIT:  {wait: 0.1, says: "stay where you are", says_ar: "ابقَ مكانك"}

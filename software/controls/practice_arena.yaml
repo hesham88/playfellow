@@ -1,0 +1,20 @@
+name: Practice Arena
+name_ar: ساحة التدريب
+window: PlayFellow Practice Arena
+default_goal: Collect all the coins, then grab the key and open the door.
+default_goal_ar: اجمع كل العملات، ثم خذ المفتاح وافتح الباب.
+genre: puzzle
+game_hint: >
+  A maze seen from above. You are the blue circle with eyes. Yellow circles are coins worth 10 points.
+  The gold key opens the brown door. Dark grey squares are walls. Each arrow press moves one square.
+  The bar at the top shows the score, coins left and whether you have the key.
+game_hint_ar: >
+  متاهة نراها من الأعلى. أنت الدائرة الزرقاء ذات العينين. الدوائر الصفراء عملات تساوي 10 نقاط. المفتاح الذهبي يفتح الباب البني. المربعات الرمادية الداكنة جدران. كل ضغطة سهم تحركك مربعًا واحدًا. الشريط في الأعلى يعرض النقاط والعملات المتبقية وهل معك المفتاح.
+actions:
+  UP:    {keys: up,    hold: 0.12, says: "move one square up", says_ar: "تحرك مربعًا لأعلى"}
+  DOWN:  {keys: down,  hold: 0.12, says: "move one square down", says_ar: "تحرك مربعًا لأسفل"}
+  LEFT:  {keys: left,  hold: 0.12, says: "move one square left", says_ar: "تحرك مربعًا لليسار"}
+  RIGHT: {keys: right, hold: 0.12, says: "move one square right", says_ar: "تحرك مربعًا لليمين"}
+  WAIT:  {wait: 0.5, says: "do nothing for a moment", says_ar: "انتظر لحظة"}
+win_hud:
+  "Coins left": 0

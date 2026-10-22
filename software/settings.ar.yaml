@@ -1,0 +1,33 @@
+# إعدادات بلاي فيلو
+# غيّر قيمة واحفظ ثم ابدأ مرة أخرى.
+
+# اسم رفيقك ولغته (english أو arabic)
+buddy_name: PlayFellow
+language: arabic
+
+# عنوان نافذة اللعبة (أو جزء منه) وبطاقة التحكم الخاصة بها (ملف في مجلد controls)
+game_window: PlayFellow Practice Arena
+controls_card: practice_arena
+
+# ماذا يجب أن يفعل رفيقك؟ وكيف تكون شخصيته؟
+goal: اجمع كل العملات، ثم خذ المفتاح وافتح الباب.
+personality: ودود وحذر وواضح. تشرح خطتك في جملة قصيرة واحدة.
+
+# كل كم ثانية ينظر إلى الشاشة، وكم لحظة سابقة يتذكر،
+# وكم زرًا يضغط في كل دور، وحجم الصور التي يراها (بالبكسل)
+look_every_seconds: 1.0
+memory_steps: 3
+max_actions_per_step: 3
+image_width: 768
+
+# أي عقل تستخدم: builtin (بلا حساب ولا مفتاح ولا إنترنت) أو gemini أو claude أو openai أو local (Ollama).
+# brain_power: smart يلعب أفضل، thrifty أقل تكلفة. اترك model فارغًا للاختيار المعتاد.
+# العقل السحابي يحتاج مفتاحك الخاص: عيّن GEMINI_API_KEY / ANTHROPIC_API_KEY / OPENAI_API_KEY
+# أو شغّل:  python play.py --save-key gemini
+brain: builtin
+brain_power: smart
+model: ''
+
+# حدود الأمان لكل جلسة
+max_minutes: 20
+max_ai_calls: 600

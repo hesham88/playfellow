@@ -1,0 +1,19 @@
+name: PlayFellow Arena · Key Caves
+name_ar: ساحة بلاي فيلو · كهوف المفتاح
+genre: metroidvania
+game_hint: >
+  A side view of three cave rooms; walking off the edge of a room shows the next one. You are the purple block.
+  The brown door in the first room is locked: you need the gold key. The key sits on a high ledge that one jump
+  can't reach, so first find the cyan jump boots (they let you jump a second time in the air). White spikes end
+  the game: jump over them. When you have the key, go back to the door, stand next to it and press Z.
+game_hint_ar: >
+  منظر جانبي لثلاث غرف كهوف؛ المشي إلى حافة الغرفة يُظهر الغرفة التالية. أنت المربع البنفسجي.
+  الباب البني في الغرفة الأولى مقفل: تحتاج المفتاح الذهبي. المفتاح على حافة عالية لا تصلها قفزة واحدة،
+  فابحث أولًا عن حذاء القفز الأزرق (يسمح لك بقفزة ثانية في الهواء). الأشواك البيضاء تنهي اللعبة: اقفز فوقها.
+  عندما يكون معك المفتاح، عُد إلى الباب وقف بجانبه واضغط Z.
+actions:
+  LEFT:  {keys: left,  hold: 0.08, says: "walk one step left", says_ar: "امشِ خطوة لليسار"}
+  RIGHT: {keys: right, hold: 0.08, says: "walk one step right", says_ar: "امشِ خطوة لليمين"}
+  JUMP:  {keys: space, hold: 0.08, says: "jump (again in the air with the boots)", says_ar: "اقفز (مرة ثانية في الهواء مع الحذاء)"}
+  OPEN:  {keys: z,     hold: 0.08, says: "open the door you are standing next to", says_ar: "افتح الباب الذي تقف بجانبه"}
+  WAIT:  {wait: 0.1, says: "wait a moment (fall or finish a jump)", says_ar: "انتظر لحظة (اسقط أو أكمل القفزة)"}

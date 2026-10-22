@@ -1,0 +1,11 @@
+name: Point-and-click
+name_ar: أشر واضغط
+genre: adventure
+game_hint: >
+  A game you play by clicking on things: puzzles, card games, board games, menus.
+game_hint_ar: >
+  لعبة تلعبها بالضغط على الأشياء: ألغاز وألعاب ورق وألعاب لوحية وقوائم.
+actions:
+  CLICK:       {click: left, says: "click on a spot", says_ar: "اضغط على مكان"}
+  RIGHT_CLICK: {click: right, says: "right-click on a spot", says_ar: "اضغط بالزر الأيمن على مكان"}
+  WAIT:        {wait: 1.0, says: "wait and watch", says_ar: "انتظر وراقب"}

@@ -1,0 +1,42 @@
+# DOOM (1993, single-player campaign) - default keyboard controls.
+# Source: https://www.doomwiki.org/wiki/Controls (The Doom Wiki - Controls, original defaults).
+# Up/Down move forward/back, Left/Right turn, Ctrl fire, Space use (doors, switches), Alt + Left/Right strafe,
+# Shift run, 1-7 weapons, Tab automap, Esc menu. (The "," and "." single-key strafes are not on our key list.)
+# Single-player campaign only.
+name: DOOM
+name_ar: دووم
+genre: first_person
+window: doom
+default_goal: Find the exit switch of the current level, opening doors and using keycards on the way.
+default_goal_ar: اعثر على مفتاح الخروج في المستوى الحالي، وافتح الأبواب واستخدم بطاقات المفاتيح في الطريق.
+game_hint: >
+  A first-person shooter, single-player campaign. The status bar at the bottom shows AMMO, HEALTH (%), the weapons
+  you own (ARMS), the face (it looks hurt when health is low), ARMOR and any keycards. Doors open with Space when you
+  face them; coloured doors need the keycard of that colour. Tab shows the map. The level ends at an exit switch
+  (often a striped panel saying EXIT). Health and ammo pickups lie on the floor.
+game_hint_ar: >
+  لعبة إطلاق نار بمنظور الشخص الأول، حملة للاعب واحد. الشريط السفلي يعرض الذخيرة والصحة (٪) والأسلحة التي تملكها والوجه
+  (يبدو مصابًا عندما تقل الصحة) والدرع وبطاقات المفاتيح. الأبواب تُفتح بالمسافة عندما تواجهها؛ والأبواب الملونة تحتاج بطاقة
+  من اللون نفسه. Tab تعرض الخريطة. ينتهي المستوى عند مفتاح خروج (غالبًا لوحة مخططة مكتوب عليها EXIT).
+actions:
+  FORWARD:      {keys: up,    hold: 0.3,  says: "move forward", says_ar: "تقدّم"}
+  BACK:         {keys: down,  hold: 0.3,  says: "move back", says_ar: "تراجع"}
+  TURN_LEFT:    {keys: left,  hold: 0.2,  says: "turn left", says_ar: "استدر لليسار"}
+  TURN_RIGHT:   {keys: right, hold: 0.2,  says: "turn right", says_ar: "استدر لليمين"}
+  STRAFE_LEFT:  {keys: [alt, left],  hold: 0.25, says: "step sideways left", says_ar: "خطوة جانبية لليسار"}
+  STRAFE_RIGHT: {keys: [alt, right], hold: 0.25, says: "step sideways right", says_ar: "خطوة جانبية لليمين"}
+  RUN_FORWARD:  {keys: [shift, up],  hold: 0.4,  says: "run forward", says_ar: "اركض للأمام"}
+  WALK_ON:      {hold_start: up, says: "keep moving forward", says_ar: "استمر في التقدم"}
+  WALK_OFF:     {hold_stop: up,  says: "stop moving forward", says_ar: "توقف عن التقدم"}
+  RELEASE_ALL:  {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  FIRE:         {keys: ctrl,  hold: 0.1, says: "fire the weapon", says_ar: "أطلق السلاح"}
+  USE:          {keys: space, hold: 0.05, says: "use: open the door or press the switch in front", says_ar: "استخدم: افتح الباب أو اضغط المفتاح الذي أمامك"}
+  WEAPON_1:     {keys: "1", hold: 0.05, says: "fist (or chainsaw)", says_ar: "القبضة (أو المنشار)"}
+  WEAPON_2:     {keys: "2", hold: 0.05, says: "pistol", says_ar: "المسدس"}
+  WEAPON_3:     {keys: "3", hold: 0.05, says: "shotgun", says_ar: "البندقية"}
+  WEAPON_4:     {keys: "4", hold: 0.05, says: "chaingun", says_ar: "الرشاش"}
+  WEAPON_5:     {keys: "5", hold: 0.05, says: "rocket launcher", says_ar: "قاذف الصواريخ"}
+  WEAPON_6:     {keys: "6", hold: 0.05, says: "plasma rifle", says_ar: "بندقية البلازما"}
+  WEAPON_7:     {keys: "7", hold: 0.05, says: "the BFG 9000 (the biggest gun)", says_ar: "سلاح BFG 9000 (أكبر سلاح)"}
+  AUTOMAP:      {keys: tab, hold: 0.05, says: "show or hide the map", says_ar: "اعرض الخريطة أو أخفها"}
+  WAIT:         {wait: 0.3, says: "wait and look", says_ar: "انتظر وانظر"}

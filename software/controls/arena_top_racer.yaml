@@ -1,0 +1,20 @@
+name: PlayFellow Arena · Top Racer
+name_ar: ساحة بلاي فيلو · السبّاق
+genre: racing
+game_hint: >
+  A square race track seen from above; cars drive clockwise. You are the purple car with the white edge; the red
+  and orange cars are the computer. Race 3 laps and finish first. The pinkish squares are corners: go in at speed 2
+  or less (brake before them) or you spin out for a moment. Orange cones on the road also spin you: change lane.
+  Space gives a short boost (3 per race) - use it on a straight, and braking ends it. The HUD shows lap, place and speed.
+game_hint_ar: >
+  حلبة سباق مربعة نراها من الأعلى؛ السيارات تسير مع عقارب الساعة. أنت السيارة البنفسجية ذات الحافة البيضاء؛ والسيارتان
+  الحمراء والبرتقالية للحاسوب. سابق 3 لفات وانتهِ أولًا. المربعات الوردية منعطفات: ادخلها بسرعة 2 أو أقل (فرمل قبلها)
+  وإلا ستدور للحظة. الأقماع البرتقالية على الطريق تجعلك تدور أيضًا: غيّر المسار.
+  المسافة تعطي تعزيزًا قصيرًا (3 في السباق) - استخدمه في طريق مستقيم، والفرملة تنهيه. الشريط العلوي يعرض اللفة والمركز والسرعة.
+actions:
+  FASTER: {keys: up,    hold: 0.05, says: "speed up by one", says_ar: "زد السرعة درجة"}
+  BRAKE:  {keys: down,  hold: 0.05, says: "brake (slow down by two; also ends a boost)", says_ar: "فرمل (أبطئ درجتين؛ وينهي التعزيز)"}
+  LEFT:   {keys: left,  hold: 0.05, says: "move one lane to your left (the outside)", says_ar: "انتقل مسارًا إلى يسارك (الخارج)"}
+  RIGHT:  {keys: right, hold: 0.05, says: "move one lane to your right (the inside)", says_ar: "انتقل مسارًا إلى يمينك (الداخل)"}
+  BOOST:  {keys: space, hold: 0.05, says: "boost for a moment (only on a straight)", says_ar: "عزّز لحظة (فقط في طريق مستقيم)"}
+  WAIT:   {wait: 0.1, says: "keep this speed and lane", says_ar: "حافظ على السرعة والمسار"}

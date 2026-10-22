@@ -1,0 +1,21 @@
+name: First-person explorer
+name_ar: مستكشف بمنظور الشخص الأول
+genre: fps
+game_hint: >
+  A 3D game seen through the player's eyes. Walk with W A S D, turn by moving the mouse, jump with space.
+  Change the keys to match your game. Use offline single-player games only.
+game_hint_ar: >
+  لعبة ثلاثية الأبعاد نراها بعيني اللاعب. امشِ بالأزرار W A S D واستدر بتحريك الفأرة واقفز بالمسافة. غيّر الأزرار لتناسب لعبتك. استخدم فقط الألعاب التي تعمل بدون إنترنت ولاعب واحد.
+actions:
+  FORWARD:      {keys: w, hold: 0.6, says: "walk forward", says_ar: "امشِ للأمام"}
+  BACK:         {keys: s, hold: 0.4, says: "walk backward", says_ar: "امشِ للخلف"}
+  STEP_LEFT:    {keys: a, hold: 0.4, says: "step to the left", says_ar: "خطوة لليسار"}
+  STEP_RIGHT:   {keys: d, hold: 0.4, says: "step to the right", says_ar: "خطوة لليمين"}
+  TURN_LEFT:    {mouse_move: [-300, 0], says: "turn left", says_ar: "استدر لليسار"}
+  TURN_RIGHT:   {mouse_move: [300, 0], says: "turn right", says_ar: "استدر لليمين"}
+  LOOK_UP:      {mouse_move: [0, -150], says: "look up", says_ar: "انظر لأعلى"}
+  LOOK_DOWN:    {mouse_move: [0, 150], says: "look down", says_ar: "انظر لأسفل"}
+  JUMP:         {keys: space, hold: 0.2, says: "jump", says_ar: "اقفز"}
+  USE:          {keys: e, hold: 0.1, says: "use or open", says_ar: "استخدم أو افتح"}
+  HIT:          {mouse_button: left, says: "hit or dig what is in the middle of the screen", says_ar: "اضرب أو احفر ما في منتصف الشاشة"}
+  WAIT:         {wait: 0.5, says: "stand still", says_ar: "قف بلا حركة"}

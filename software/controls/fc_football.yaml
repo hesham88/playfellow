@@ -1,0 +1,36 @@
+# EA SPORTS FC (PC) - keyboard controls. VERIFY BEFORE LIVE PLAY.
+# Sources: https://www.magicgameworld.com/ea-sports-fc-25-pc-keyboard-controls-guide/ and
+#          https://fifauteam.com/fc-25-controls/ (keyboard-only "Classic" scheme, as published by these guides).
+# EA does not publish a keyboard-default page; open Customize > Settings > Controller Settings > Keyboard in the game,
+# check each key below, and correct this card if any differ. Kick-off / career matches against the computer only.
+name: EA SPORTS FC
+name_ar: إي إيه سبورتس إف سي
+genre: football
+window: ea sports fc
+default_goal: Win the match against the computer - build attacks with short passes and shoot from inside the box.
+default_goal_ar: افز بالمباراة ضد الحاسوب - ابنِ الهجمات بالتمريرات القصيرة وسدد من داخل منطقة الجزاء.
+game_hint: >
+  A football (soccer) game seen from the side of the pitch. The player you control has a name and an indicator over
+  their head. The score and match clock are at the top-left; the radar at the bottom shows every player. Arrow keys
+  move. With the ball: short pass, lob/cross, through ball, shoot (hold for power). Without the ball: tackle, press,
+  and switch to the player nearest the ball. Matches against the computer only.
+game_hint_ar: >
+  لعبة كرة قدم نراها من جانب الملعب. اللاعب الذي تتحكم به عليه اسمه ومؤشر فوق رأسه. النتيجة ووقت المباراة في الأعلى يسارًا؛
+  والرادار في الأسفل يعرض كل اللاعبين. الأسهم للحركة. مع الكرة: تمريرة قصيرة، أو عالية/عرضية، أو بينية، أو تسديدة (اضغط
+  مطولًا للقوة). بدون الكرة: اقطع واضغط وبدّل إلى أقرب لاعب للكرة. المباريات ضد الحاسوب فقط.
+actions:
+  UP:           {keys: up,    hold: 0.3, says: "move up the screen", says_ar: "تحرك لأعلى الشاشة"}
+  DOWN:         {keys: down,  hold: 0.3, says: "move down the screen", says_ar: "تحرك لأسفل الشاشة"}
+  LEFT:         {keys: left,  hold: 0.3, says: "move left", says_ar: "تحرك لليسار"}
+  RIGHT:        {keys: right, hold: 0.3, says: "move right", says_ar: "تحرك لليمين"}
+  SHORT_PASS:   {keys: s, hold: 0.1, says: "short pass", says_ar: "تمريرة قصيرة"}
+  LOB_CROSS:    {keys: a, hold: 0.2, says: "lob pass or cross", says_ar: "تمريرة عالية أو عرضية"}
+  THROUGH_BALL: {keys: w, hold: 0.1, says: "through ball", says_ar: "تمريرة بينية"}
+  SHOOT:        {keys: d, hold: 0.35, says: "shoot (hold longer for more power)", says_ar: "سدد (اضغط أطول لقوة أكبر)"}
+  SPRINT_ON:    {hold_start: e, says: "sprint", says_ar: "اركض بسرعة"}
+  SPRINT_OFF:   {hold_stop: e,  says: "stop sprinting", says_ar: "توقف عن الركض السريع"}
+  SWITCH:       {keys: q, hold: 0.05, says: "switch to the player nearest the ball", says_ar: "بدّل إلى أقرب لاعب للكرة"}
+  TACKLE:       {keys: d, hold: 0.1, says: "standing tackle (defending)", says_ar: "قطع الكرة واقفًا (في الدفاع)"}
+  SLIDE_TACKLE: {keys: a, hold: 0.1, says: "slide tackle (defending, risky)", says_ar: "قطع بالانزلاق (في الدفاع، خطير)"}
+  RELEASE_ALL:  {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  WAIT:         {wait: 0.2, says: "wait", says_ar: "انتظر"}

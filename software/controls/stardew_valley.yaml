@@ -1,0 +1,51 @@
+# Stardew Valley (PC) - default keyboard + mouse controls.
+# Source: https://stardewvalleywiki.com/Controls (the official Stardew Valley Wiki - Controls, PC defaults).
+# W/A/S/D move; C or left click: use tool / place item; X or right click: check / do action; E or Esc: menu;
+# F journal; M map; Left Shift run; 1-0 toolbar slots; Tab shifts the toolbar.
+name: Stardew Valley
+name_ar: ستاردو فالي
+genre: rpg_sim
+window: stardew valley
+default_goal: Grow your farm - clear some land, plant and water the seeds, and talk to a villager before the day ends.
+default_goal_ar: نمِّ مزرعتك - نظّف بعض الأرض، وازرع البذور واسقِها، وتحدث مع أحد القرويين قبل نهاية اليوم.
+game_hint: >
+  A farming life game seen from above. You are the farmer. Top-right HUD: the clock and date (the day ends at 2 am;
+  go to bed before then) and your gold. The green bar at the bottom-right is energy: tools use it. The toolbar at the
+  bottom shows your tools and items (1-0 select). Use a tool with C on the square in front of you (face it first).
+  X talks to people, opens doors, picks up items and harvests crops.
+game_hint_ar: >
+  لعبة حياة زراعية نراها من الأعلى. أنت المزارع. في الأعلى يمينًا: الساعة والتاريخ (ينتهي اليوم في الثانية فجرًا؛ نَم قبلها)
+  وذهبك. الشريط الأخضر أسفل اليمين هو الطاقة: الأدوات تستهلكها. شريط الأدوات في الأسفل يعرض أدواتك وأشياءك (1-0 للاختيار).
+  استخدم الأداة بـ C على المربع الذي أمامك (التفت إليه أولًا). X للتحدث مع الناس وفتح الأبواب والتقاط الأشياء وجني المحاصيل.
+actions:
+  UP:          {keys: w, hold: 0.25, says: "walk up", says_ar: "امشِ لأعلى"}
+  DOWN:        {keys: s, hold: 0.25, says: "walk down", says_ar: "امشِ لأسفل"}
+  LEFT:        {keys: a, hold: 0.25, says: "walk left", says_ar: "امشِ لليسار"}
+  RIGHT:       {keys: d, hold: 0.25, says: "walk right", says_ar: "امشِ لليمين"}
+  WALK_UP:     {hold_start: w, says: "keep walking up", says_ar: "استمر في المشي لأعلى"}
+  WALK_DOWN:   {hold_start: s, says: "keep walking down", says_ar: "استمر في المشي لأسفل"}
+  WALK_LEFT:   {hold_start: a, says: "keep walking left", says_ar: "استمر في المشي لليسار"}
+  WALK_RIGHT:  {hold_start: d, says: "keep walking right", says_ar: "استمر في المشي لليمين"}
+  STOP_UP:     {hold_stop: w, says: "stop walking up", says_ar: "توقف عن المشي لأعلى"}
+  STOP_DOWN:   {hold_stop: s, says: "stop walking down", says_ar: "توقف عن المشي لأسفل"}
+  STOP_LEFT:   {hold_stop: a, says: "stop walking left", says_ar: "توقف عن المشي لليسار"}
+  STOP_RIGHT:  {hold_stop: d, says: "stop walking right", says_ar: "توقف عن المشي لليمين"}
+  RELEASE_ALL: {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  USE_TOOL:    {keys: c, hold: 0.1, says: "use the selected tool or item on the square in front", says_ar: "استخدم الأداة المحددة على المربع الذي أمامك"}
+  ACTION:      {keys: x, hold: 0.05, says: "check / talk / pick up / harvest", says_ar: "افحص / تحدث / التقط / اجنِ"}
+  CLICK:       {click: left, says: "click a spot (menus, or use a tool there)", says_ar: "انقر مكانًا (القوائم، أو استخدم أداة هناك)"}
+  MENU:        {keys: e, hold: 0.05, says: "open or close the menu (inventory)", says_ar: "افتح القائمة أو أغلقها (الحقيبة)"}
+  JOURNAL:     {keys: f, hold: 0.05, says: "open the quest journal", says_ar: "افتح دفتر المهام"}
+  MAP:         {keys: m, hold: 0.05, says: "open the map", says_ar: "افتح الخريطة"}
+  SLOT_1:      {keys: "1", hold: 0.05, says: "toolbar slot 1", says_ar: "خانة الأدوات 1"}
+  SLOT_2:      {keys: "2", hold: 0.05, says: "toolbar slot 2", says_ar: "خانة الأدوات 2"}
+  SLOT_3:      {keys: "3", hold: 0.05, says: "toolbar slot 3", says_ar: "خانة الأدوات 3"}
+  SLOT_4:      {keys: "4", hold: 0.05, says: "toolbar slot 4", says_ar: "خانة الأدوات 4"}
+  SLOT_5:      {keys: "5", hold: 0.05, says: "toolbar slot 5", says_ar: "خانة الأدوات 5"}
+  SLOT_6:      {keys: "6", hold: 0.05, says: "toolbar slot 6", says_ar: "خانة الأدوات 6"}
+  SLOT_7:      {keys: "7", hold: 0.05, says: "toolbar slot 7", says_ar: "خانة الأدوات 7"}
+  SLOT_8:      {keys: "8", hold: 0.05, says: "toolbar slot 8", says_ar: "خانة الأدوات 8"}
+  SLOT_9:      {keys: "9", hold: 0.05, says: "toolbar slot 9", says_ar: "خانة الأدوات 9"}
+  SLOT_10:     {keys: "0", hold: 0.05, says: "toolbar slot 10", says_ar: "خانة الأدوات 10"}
+  NEXT_ROW:    {keys: tab, hold: 0.05, says: "shift the toolbar to the next row", says_ar: "انقل شريط الأدوات إلى الصف التالي"}
+  WAIT:        {wait: 0.5, says: "wait a moment", says_ar: "انتظر لحظة"}

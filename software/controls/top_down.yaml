@@ -1,0 +1,14 @@
+name: Top-down adventure
+name_ar: مغامرة من الأعلى
+genre: top_down
+game_hint: >
+  A game seen from above. Move with W A S D and use things with E. Change the keys to match your game.
+game_hint_ar: >
+  لعبة نراها من الأعلى. تحرك بالأزرار W A S D واستخدم الأشياء بالزر E. غيّر الأزرار لتناسب لعبتك.
+actions:
+  UP:     {keys: w, hold: 0.3, says: "walk up", says_ar: "امشِ لأعلى"}
+  DOWN:   {keys: s, hold: 0.3, says: "walk down", says_ar: "امشِ لأسفل"}
+  LEFT:   {keys: a, hold: 0.3, says: "walk left", says_ar: "امشِ لليسار"}
+  RIGHT:  {keys: d, hold: 0.3, says: "walk right", says_ar: "امشِ لليمين"}
+  USE:    {keys: e, hold: 0.1, says: "use or pick up what is in front of you", says_ar: "استخدم أو التقط ما أمامك"}
+  WAIT:   {wait: 0.5, says: "stand still", says_ar: "قف بلا حركة"}

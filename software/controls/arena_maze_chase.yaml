@@ -1,0 +1,15 @@
+name: PlayFellow Arena · Maze Chase
+name_ar: ساحة بلاي فيلو · مطاردة المتاهة
+genre: maze
+game_hint: >
+  Seen from above. Move through the maze with the arrow keys. Collect coins and grab the key while
+  evading the red chaser, then reach the door to unlock it and escape.
+game_hint_ar: >
+  منظر من الأعلى. تحرك في المتاهة بمفاتيح الأسهم. اجمع العملات وخذ المفتاح متفادياً المطارد الأحمر، ثم اصل إلى الباب وافتحه للهرب.
+actions:
+  UP:    {keys: up,    hold: 0.08, says: "walk one square up", says_ar: "تحرك مربعاً للأعلى"}
+  DOWN:  {keys: down,  hold: 0.08, says: "walk one square down", says_ar: "تحرك مربعاً للأسفل"}
+  LEFT:  {keys: left,  hold: 0.08, says: "walk one square left", says_ar: "تحرك مربعاً لليسار"}
+  RIGHT: {keys: right, hold: 0.08, says: "walk one square right", says_ar: "تحرك مربعاً لليمين"}
+win_hud:
+  "Coins left": 0

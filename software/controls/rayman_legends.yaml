@@ -1,0 +1,197 @@
+name: Rayman Legends
+name_ar: ريمان ليجندز
+genre: platformer
+game_hint: >
+  A 2D platformer. The player has already opened the game. From the title screen, press a key, choose Continue, and you're in.
+  Menus are chosen with the arrows + Enter. On-screen hints like "[W] Open" or "(ESC) Help" show which key does what.
+  If you don't know a key yet, open Options > Controls once and remember what each key does.
+  Teensies are small blue creatures in cages: free them. Lums are yellow and worth collecting.
+  Teensies can be in cages floating in the air: jump/glide up to them and attack (S).
+game_hint_ar: >
+  لعبة منصات ثنائية الأبعاد. اللاعب فتح اللعبة بالفعل. من شاشة العنوان، اضغط مفتاحًا، اختر Continue، وأنت بالداخل.
+  تُختار القوائم بالأسهم + Enter. التلميحات على الشاشة مثل "[W] Open" أو "(ESC) Help" تُظهر أي مفتاح يفعل ماذا.
+  إذا لم تعرف مفتاحًا بعد، افتح Options > Controls مرة واحدة وتذكر ماذا يفعل كل مفتاح.
+  Teensies مخلوقات زرقاء صغيرة في أقفاص: حررها. Lums صفراء وتستحق الجمع.
+  يمكن أن تكون Teensies في أقفاص عائمة في الهواء: اقفز/انزلق إليها واهجم (S).
+actions:
+  LEFT:
+    keys: left
+    hold: 0.15
+    says: "press left arrow (hold 0.15 seconds, for menus and small steps)"
+    says_ar: "اضغط سهم يسار (اضغط 0.15 ثانية، للقوائم والخطوات الصغيرة)"
+
+  RIGHT:
+    keys: right
+    hold: 0.15
+    says: "press right arrow (hold 0.15 seconds, for menus and small steps)"
+    says_ar: "اضغط سهم يمين (اضغط 0.15 ثانية، للقوائم والخطوات الصغيرة)"
+
+  UP:
+    keys: up
+    hold: 0.15
+    says: "press up arrow (hold 0.15 seconds, for menus and small steps)"
+    says_ar: "اضغط سهم أعلى (اضغط 0.15 ثانية، للقوائم والخطوات الصغيرة)"
+
+  DOWN:
+    keys: down
+    hold: 0.15
+    says: "press down arrow (hold 0.15 seconds, for menus and small steps)"
+    says_ar: "اضغط سهم أسفل (اضغط 0.15 ثانية، للقوائم والخطوات الصغيرة)"
+
+  RUN_LEFT:
+    keys: left
+    hold: 0.9
+    says: "press left arrow (hold 0.9 seconds, run left)"
+    says_ar: "اضغط سهم يسار (اضغط 0.9 ثانية، اجرِ يسارًا)"
+
+  RUN_RIGHT:
+    keys: right
+    hold: 0.9
+    says: "press right arrow (hold 0.9 seconds, run right)"
+    says_ar: "اضغط سهم يمين (اضغط 0.9 ثانية، اجرِ يمينًا)"
+
+  KEY_SPACE:
+    keys: space
+    hold: 0.12
+    says: "press space (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط مسافة (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_ENTER:
+    keys: enter
+    hold: 0.12
+    says: "press enter (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط إدخال (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_ESC:
+    keys: esc
+    hold: 0.12
+    says: "press esc (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط esc (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_W:
+    keys: w
+    hold: 0.12
+    says: "press w (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط w (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_A:
+    keys: a
+    hold: 0.12
+    says: "press a (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط a (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_S:
+    keys: s
+    hold: 0.12
+    says: "press s (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط s (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_D:
+    keys: d
+    hold: 0.12
+    says: "press d (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط d (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_Q:
+    keys: q
+    hold: 0.12
+    says: "press q (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط q (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_E:
+    keys: e
+    hold: 0.12
+    says: "press e (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط e (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_Z:
+    keys: z
+    hold: 0.12
+    says: "press z (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط z (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_X:
+    keys: x
+    hold: 0.12
+    says: "press x (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط x (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_C:
+    keys: c
+    hold: 0.12
+    says: "press c (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط c (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_SHIFT:
+    keys: shift
+    hold: 0.12
+    says: "press shift (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط shift (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_BACKSPACE:
+    keys: backspace
+    hold: 0.12
+    says: "press backspace (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط backspace (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  KEY_TAB:
+    keys: tab
+    hold: 0.12
+    says: "press tab (check what it does in Options > Controls or the on-screen hints)"
+    says_ar: "اضغط tab (تحقق ماذا يفعل في Options > Controls أو التلميحات على الشاشة)"
+
+  JUMP_RIGHT:
+    keys: [right, space]
+    hold: 0.5
+    says: "jump right (press right and space together, hold 0.5 seconds)"
+    says_ar: "اقفز يمينًا (اضغط يمين ومسافة معًا، اضغط 0.5 ثانية)"
+
+  JUMP_LEFT:
+    keys: [left, space]
+    hold: 0.5
+    says: "jump left (press left and space together, hold 0.5 seconds)"
+    says_ar: "اقفز يسارًا (اضغط يسار ومسافة معًا، اضغط 0.5 ثانية)"
+
+  HOLD_LEFT:
+    hold_start: left
+    says: "start holding left arrow (keeps it pressed until stopped)"
+    says_ar: "ابدأ الضغط على سهم left (يبقيه مضغوطًا حتى يتوقف)"
+
+  HOLD_RIGHT:
+    hold_start: right
+    says: "start holding right arrow (keeps it pressed until stopped)"
+    says_ar: "ابدأ الضغط على سهم right (يبقيه مضغوطًا حتى يتوقف)"
+
+  STOP_MOVING:
+    release_all: true
+    says: "stop all movement (release all held keys)"
+    says_ar: "أوقف كل الحركة (حرر كل المفاتيح المضغوطة)"
+
+  JUMP_HOLD:
+    keys: space
+    hold: 1.2
+    says: "hold jump in the air (can glide or hover; use it to reach floating cages and cross big gaps)"
+    says_ar: "اضغط واستمر القفز في الهواء (يمكن الانزلاق أو التحليق؛ استخدمه للوصول للأقفاص العائمة وعبور الفجوات الكبيرة)"
+
+  GLIDE_RIGHT:
+    keys: [right, space]
+    hold: 1.6
+    says: "glide right while in the air (holding jump in the air can glide/hover; use it to reach floating cages and cross big gaps)"
+    says_ar: "انزلق يمينًا أثناء وجودك في الهواء (الضغط المستمر على القفز في الهواء يمكن أن ينزلق/يحلق؛ استخدمه للوصول للأقفاص العائمة وعبور الفجوات الكبيرة)"
+
+  GLIDE_LEFT:
+    keys: [left, space]
+    hold: 1.6
+    says: "glide left while in the air (holding jump in the air can glide/hover; use it to reach floating cages and cross big gaps)"
+    says_ar: "انزلق يسارًا أثناء وجودك في الهواء (الضغط المستمر على القفز في الهواء يمكن أن ينزلق/يحلق؛ استخدمه للوصول للأقفاص العائمة وعبور الفجوات الكبيرة)"
+
+  AIR_ATTACK:
+    keys: [space, s]
+    hold: 0.4
+    says: "attack while in the air (jump then press space and s together)"
+    says_ar: "اهجم أثناء وجودك في الهواء (اقفز ثم اضغط مسافة و s معًا)"
+
+  WAIT:
+    wait: 0.6
+    says: "wait a moment"
+    says_ar: "انتظر لحظة"

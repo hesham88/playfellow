@@ -1,0 +1,32 @@
+# PlayStation Remote Play / Chiaki: a PlayStation 4 or 5 shown in a window on this PC.
+# The console is somewhere else (usually the TV). The buddy presses KEYBOARD keys in the stream window, and the stream
+# program turns them into controller buttons. Which key is which button is set in that program
+# (Chiaki: Settings -> Controller / keyboard mapping; PS Remote Play: Settings), so CHECK THE KEYS BELOW against yours and
+# edit this card if they differ. The defaults here are a common layout and have not been checked on every setup yet.
+# Games on a console are often online with real people: you see the online warning before play starts.
+name: PlayStation Remote Play
+name_ar: بلايستيشن ريموت بلاي
+window: PS Remote Play
+genre: other
+default_goal: Help the player in the game on the console, carefully, and ask if a screen is unclear.
+default_goal_ar: ساعد اللاعب في اللعبة على الجهاز بحذر، واسأل إذا لم تكن الشاشة واضحة.
+game_hint: >
+  A PlayStation game streamed into a window on the PC. Use the D-pad keys to move through menus and the face buttons
+  to choose. CROSS confirms, CIRCLE goes back. Never buy anything, never sign in, and never change console settings.
+  If a shop, a payment or a sign-in screen appears, stop and tell the player.
+game_hint_ar: >
+  لعبة بلايستيشن تُبثّ إلى نافذة على الحاسوب. استخدم مفاتيح الأسهم للتنقل في القوائم وأزرار الوجه للاختيار.
+  زر X يؤكد وزر الدائرة يرجع للخلف. لا تشترِ أي شيء ولا تسجّل الدخول ولا تغيّر إعدادات الجهاز.
+  إذا ظهرت شاشة متجر أو دفع أو تسجيل دخول فتوقف وأخبر اللاعب.
+actions:
+  UP:       {keys: up,    hold: 0.12, says: "D-pad up", says_ar: "السهم لأعلى"}
+  DOWN:     {keys: down,  hold: 0.12, says: "D-pad down", says_ar: "السهم لأسفل"}
+  LEFT:     {keys: left,  hold: 0.12, says: "D-pad left", says_ar: "السهم لليسار"}
+  RIGHT:    {keys: right, hold: 0.12, says: "D-pad right", says_ar: "السهم لليمين"}
+  CROSS:    {keys: enter, hold: 0.12, says: "press CROSS (confirm)", says_ar: "اضغط زر X (تأكيد)"}
+  CIRCLE:   {keys: backspace, hold: 0.12, says: "press CIRCLE (back)", says_ar: "اضغط زر الدائرة (رجوع)"}
+  SQUARE:   {keys: a,     hold: 0.12, says: "press SQUARE", says_ar: "اضغط زر المربع"}
+  TRIANGLE: {keys: s,     hold: 0.12, says: "press TRIANGLE", says_ar: "اضغط زر المثلث"}
+  L1:       {keys: q,     hold: 0.12, says: "press L1", says_ar: "اضغط L1"}
+  R1:       {keys: e,     hold: 0.12, says: "press R1", says_ar: "اضغط R1"}
+  WAIT:     {wait: 0.5, says: "wait a moment", says_ar: "انتظر لحظة"}

@@ -1,0 +1,14 @@
+name: Side-scrolling platformer
+name_ar: لعبة منصات جانبية
+genre: platformer
+game_hint: >
+  A 2D game seen from the side. Walk left and right, jump over gaps and enemies. Change the keys to match your game.
+game_hint_ar: >
+  لعبة ثنائية الأبعاد نراها من الجانب. امشِ يسارًا ويمينًا واقفز فوق الفجوات والأعداء. غيّر الأزرار لتناسب لعبتك.
+actions:
+  WALK_LEFT:  {keys: left,  hold: 0.3, says: "walk left", says_ar: "امشِ لليسار"}
+  WALK_RIGHT: {keys: right, hold: 0.3, says: "walk right", says_ar: "امشِ لليمين"}
+  JUMP:       {keys: space, hold: 0.2, says: "jump straight up", says_ar: "اقفز للأعلى"}
+  JUMP_RIGHT: {keys: [right, space], hold: 0.4, says: "jump forward to the right", says_ar: "اقفز للأمام لليمين"}
+  JUMP_LEFT:  {keys: [left, space], hold: 0.4, says: "jump to the left", says_ar: "اقفز لليسار"}
+  WAIT:       {wait: 0.5, says: "stand still", says_ar: "قف بلا حركة"}

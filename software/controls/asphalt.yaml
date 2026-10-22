@@ -1,0 +1,32 @@
+# Asphalt Legends Unite (PC, Manual controls) - default keyboard controls.
+# Sources: https://www.magicgameworld.com/asphalt-legends-unite-controls-keyboard-and-gamepad/
+#          (W / Up accelerate, S / Down drift, A-D / Left-Right steer, Space nitro); the in-game Settings > Controls
+#          screen lets the player check them. Career / single-player races against the computer only.
+name: Asphalt Legends Unite
+name_ar: أسفلت ليجندز يونايت
+genre: racing
+window: asphalt
+default_goal: Win the career race - finish first, using nitro on straights and drifting through corners.
+default_goal_ar: افز بسباق المسيرة - انتهِ أولًا، باستخدام النيترو في الطرق المستقيمة والانزلاق في المنعطفات.
+game_hint: >
+  An arcade racing game seen from behind your car. Top of the screen: your position (for example 3/8), lap and race
+  time. The nitro gauge fills as you drive, drift and hit jumps; Space spends it. Down (S) makes the car drift, which
+  is how you take sharp corners fast. Hitting walls and traffic slows you. Some cars accelerate on their own: if the
+  car is not moving, hold Up. Single-player career races against the computer only.
+game_hint_ar: >
+  لعبة سباق نرى فيها سيارتك من الخلف. أعلى الشاشة: مركزك (مثلًا 3/8) واللفة ووقت السباق. عداد النيترو يمتلئ بالقيادة والانزلاق
+  والقفزات؛ والمسافة تنفقه. الأسفل (S) يجعل السيارة تنزلق، وهكذا تأخذ المنعطفات الحادة بسرعة. الاصطدام بالجدران والسيارات يبطئك.
+  بعض السيارات تتسارع وحدها: إن لم تتحرك السيارة فاضغط الأعلى مطولًا. سباقات المسيرة ضد الحاسوب فقط.
+actions:
+  STEER_LEFT:  {keys: left,  hold: 0.25, says: "steer left a little", says_ar: "انعطف لليسار قليلًا"}
+  STEER_RIGHT: {keys: right, hold: 0.25, says: "steer right a little", says_ar: "انعطف لليمين قليلًا"}
+  HOLD_LEFT:   {hold_start: left,  says: "keep steering left", says_ar: "استمر في الانعطاف لليسار"}
+  HOLD_RIGHT:  {hold_start: right, says: "keep steering right", says_ar: "استمر في الانعطاف لليمين"}
+  STOP_LEFT:   {hold_stop: left,   says: "stop steering left", says_ar: "توقف عن الانعطاف لليسار"}
+  STOP_RIGHT:  {hold_stop: right,  says: "stop steering right", says_ar: "توقف عن الانعطاف لليمين"}
+  GAS_ON:      {hold_start: up, says: "accelerate and keep accelerating", says_ar: "تسارع واستمر في التسارع"}
+  GAS_OFF:     {hold_stop: up,  says: "stop accelerating", says_ar: "توقف عن التسارع"}
+  DRIFT:       {keys: down, hold: 0.6, says: "drift through the corner", says_ar: "انزلق في المنعطف"}
+  NITRO:       {keys: space, hold: 0.1, says: "use nitro", says_ar: "استخدم النيترو"}
+  RELEASE_ALL: {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  WAIT:        {wait: 0.2, says: "keep driving straight", says_ar: "استمر في القيادة باستقامة"}

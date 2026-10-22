@@ -1,0 +1,17 @@
+name: PlayFellow Arena · Snake
+name_ar: ساحة بلاي فيلو · الثعبان
+genre: arcade
+game_hint: >
+  A snake on a 10 by 10 grid. The bright green square is its head; it keeps moving on its own. An arrow turns it
+  (it can't turn straight back). Eat the pink dot to grow by one. Hitting a wall or your own body ends the game.
+  Reach length 20 to win. It speeds up as it grows, so plan your turns early and leave yourself room.
+game_hint_ar: >
+  ثعبان على شبكة 10 في 10. المربع الأخضر الفاتح هو رأسه؛ وهو يتحرك وحده باستمرار. السهم يغيّر اتجاهه
+  (لا يمكنه الرجوع مباشرة للخلف). كُل النقطة الوردية لتطول مربعًا. الاصطدام بجدار أو بجسمك ينهي اللعبة.
+  صِل إلى طول 20 لتفوز. يسرع كلما طال، فخطّط لانعطافاتك مبكرًا واترك لنفسك مساحة.
+actions:
+  UP:    {keys: up,    hold: 0.05, says: "turn up", says_ar: "اتجه لأعلى"}
+  DOWN:  {keys: down,  hold: 0.05, says: "turn down", says_ar: "اتجه لأسفل"}
+  LEFT:  {keys: left,  hold: 0.05, says: "turn left", says_ar: "اتجه لليسار"}
+  RIGHT: {keys: right, hold: 0.05, says: "turn right", says_ar: "اتجه لليمين"}
+  WAIT:  {wait: 0.1, says: "keep going straight", says_ar: "استمر في نفس الاتجاه"}

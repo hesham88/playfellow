@@ -1,0 +1,36 @@
+# eFootball (PC, Steam) - keyboard controls. VERIFY BEFORE LIVE PLAY.
+# Sources: https://steamcommunity.com/sharedfiles/filedetails/?id=2377058712 (Steam guide: keyboard controls) and
+#          https://steamcommunity.com/app/1665460/discussions/0/3780247324081958295/ (eFootball keyboard defaults thread).
+# No official keyboard-default page was found. Open Settings > Controls > Keyboard in the game, check each key below,
+# and correct this card if any differ. Matches against the computer only (never online).
+name: eFootball
+name_ar: إي فوتبول
+genre: football
+window: efootball
+default_goal: Win the match against the computer - keep the ball, pass forward and shoot when you have a clear chance.
+default_goal_ar: افز بالمباراة ضد الحاسوب - حافظ على الكرة، ومرر للأمام، وسدد عندما تكون الفرصة واضحة.
+game_hint: >
+  A football (soccer) game seen from the side of the pitch. The player you control has a marker over their head.
+  The score and match clock are at the top-left. Arrow keys move; you attack towards the goal shown by the radar
+  at the bottom. With the ball: pass to a team-mate, through-ball into space ahead of a runner, shoot near the goal.
+  Without the ball: press to win it back and switch to the player nearest the ball. Matches against the computer only.
+game_hint_ar: >
+  لعبة كرة قدم نراها من جانب الملعب. اللاعب الذي تتحكم به عليه علامة فوق رأسه. النتيجة ووقت المباراة في الأعلى يسارًا.
+  الأسهم للحركة؛ وتهاجم نحو المرمى الظاهر في الرادار أسفل الشاشة. مع الكرة: مرر لزميل، أو مرر بينيًا إلى المساحة أمام
+  لاعب يركض، أو سدد قرب المرمى. بدون الكرة: اضغط لتستعيدها وبدّل إلى أقرب لاعب للكرة. المباريات ضد الحاسوب فقط.
+actions:
+  UP:           {keys: up,    hold: 0.3, says: "move up the screen", says_ar: "تحرك لأعلى الشاشة"}
+  DOWN:         {keys: down,  hold: 0.3, says: "move down the screen", says_ar: "تحرك لأسفل الشاشة"}
+  LEFT:         {keys: left,  hold: 0.3, says: "move left", says_ar: "تحرك لليسار"}
+  RIGHT:        {keys: right, hold: 0.3, says: "move right", says_ar: "تحرك لليمين"}
+  SHORT_PASS:   {keys: s, hold: 0.1, says: "short pass", says_ar: "تمريرة قصيرة"}
+  LOFTED_PASS:  {keys: a, hold: 0.2, says: "lofted pass or cross", says_ar: "تمريرة عالية أو عرضية"}
+  THROUGH_BALL: {keys: w, hold: 0.1, says: "through ball into space", says_ar: "تمريرة بينية إلى المساحة"}
+  SHOOT:        {keys: d, hold: 0.3, says: "shoot (hold longer for more power)", says_ar: "سدد (اضغط أطول لقوة أكبر)"}
+  SPRINT_ON:    {hold_start: shift, says: "sprint", says_ar: "اركض بسرعة"}
+  SPRINT_OFF:   {hold_stop: shift,  says: "stop sprinting", says_ar: "توقف عن الركض السريع"}
+  SWITCH:       {keys: q, hold: 0.05, says: "switch to another player", says_ar: "بدّل إلى لاعب آخر"}
+  PRESS:        {keys: s, hold: 0.4, says: "press the opponent with the ball (defending)", says_ar: "اضغط على الخصم الذي معه الكرة (في الدفاع)"}
+  TACKLE:       {keys: d, hold: 0.1, says: "tackle (defending)", says_ar: "اقطع الكرة (في الدفاع)"}
+  RELEASE_ALL:  {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  WAIT:         {wait: 0.2, says: "wait", says_ar: "انتظر"}

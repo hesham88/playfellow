@@ -1,0 +1,37 @@
+# Celeste (PC) - default keyboard controls.
+# Sources: https://www.magicgameworld.com/?p=147653 (Celeste controls guide: default binds);
+#          the in-game Options > Keyboard Config screen shows the same defaults.
+# Arrows move and aim the dash; C jump; X dash; Z (also V / Left Shift) grab. Esc pause, Tab journal.
+name: Celeste
+name_ar: سيليست
+genre: platformer
+window: celeste
+default_goal: Reach the end of the current chapter screen by screen, collecting strawberries when it is safe.
+default_goal_ar: صِل إلى نهاية الفصل الحالي شاشةً بعد شاشة، واجمع الفراولة عندما يكون ذلك آمنًا.
+game_hint: >
+  A 2D platformer. You are Madeline (red hair = dash ready, blue hair = dash used). Each screen is a small puzzle:
+  reach the exit on the far side. Jump with C, dash with X in the direction you hold (8 directions, once in the air,
+  refilled when you land), grab and climb walls with Z. Strawberries are optional collectibles. Dying just restarts
+  the screen. Pausing shows the death counter and the strawberry count.
+game_hint_ar: >
+  لعبة منصات ثنائية الأبعاد. أنت مادلين (الشعر الأحمر = الاندفاع جاهز، الأزرق = استُخدم). كل شاشة لغز صغير: صِل إلى المخرج
+  في الجهة الأخرى. اقفز بـ C، واندفع بـ X في الاتجاه الذي تضغطه (8 اتجاهات، مرة في الهواء، ويتجدد عند الهبوط)، وأمسك الجدران
+  وتسلّقها بـ Z. الفراولة مقتنيات اختيارية. الموت يعيد الشاشة فقط. الإيقاف المؤقت يعرض عدد الوفيات والفراولة.
+actions:
+  LEFT:          {keys: left,  hold: 0.12, says: "move left", says_ar: "تحرك لليسار"}
+  RIGHT:         {keys: right, hold: 0.12, says: "move right", says_ar: "تحرك لليمين"}
+  UP:            {keys: up,    hold: 0.12, says: "aim up (climb up while grabbing)", says_ar: "صوّب لأعلى (تسلّق لأعلى أثناء الإمساك)"}
+  DOWN:          {keys: down,  hold: 0.12, says: "crouch or aim down (climb down while grabbing)", says_ar: "انحنِ أو صوّب لأسفل (انزل أثناء الإمساك)"}
+  JUMP:          {keys: c,     hold: 0.15, says: "jump", says_ar: "اقفز"}
+  DASH:          {keys: x,     hold: 0.08, says: "dash the way you are holding", says_ar: "اندفع في الاتجاه الذي تضغطه"}
+  DASH_UP_RIGHT: {keys: [up, right, x], hold: 0.1, says: "dash up and right", says_ar: "اندفع لأعلى ولليمين"}
+  DASH_UP_LEFT:  {keys: [up, left, x],  hold: 0.1, says: "dash up and left", says_ar: "اندفع لأعلى ولليسار"}
+  RUN_RIGHT:     {hold_start: right, says: "keep running right", says_ar: "استمر في الجري لليمين"}
+  RUN_LEFT:      {hold_start: left,  says: "keep running left", says_ar: "استمر في الجري لليسار"}
+  STOP_RIGHT:    {hold_stop: right,  says: "stop running right", says_ar: "توقف عن الجري لليمين"}
+  STOP_LEFT:     {hold_stop: left,   says: "stop running left", says_ar: "توقف عن الجري لليسار"}
+  GRAB:          {hold_start: z, says: "grab the wall and hold on", says_ar: "أمسك الجدار واثبت"}
+  LET_GO:        {hold_stop: z,  says: "let go of the wall", says_ar: "اترك الجدار"}
+  RELEASE_ALL:   {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  PAUSE:         {keys: esc, hold: 0.05, says: "pause (shows deaths and strawberries)", says_ar: "إيقاف مؤقت (يعرض الوفيات والفراولة)"}
+  WAIT:          {wait: 0.3, says: "wait and watch", says_ar: "انتظر وراقب"}

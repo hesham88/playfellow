@@ -1,0 +1,33 @@
+# PlayFellow settings
+# Change a value, save, then start again.
+
+# Your buddy's name and language (english or arabic)
+buddy_name: PlayFellow
+language: english
+
+# The game window title (or part of it) and its controls card (a file in the controls folder)
+game_window: PlayFellow Practice Arena
+controls_card: practice_arena
+
+# What should your buddy do? And what is it like?
+goal: Collect all the coins, then grab the key and open the door.
+personality: Friendly, careful and clear. You explain your plan in one short sentence.
+
+# How often it looks at the screen (seconds), how many past moments it remembers,
+# how many buttons it may press each turn, and how big its pictures are (pixels wide)
+look_every_seconds: 1.0
+memory_steps: 3
+max_actions_per_step: 4
+image_width: 640
+
+# Which brain to use: builtin (no account, no key, no network), gemini, claude, openai or local (Ollama).
+# brain_power: smart plays best, thrifty costs least. Leave model empty for the usual one.
+# A cloud brain needs your own key: set GEMINI_API_KEY / ANTHROPIC_API_KEY / OPENAI_API_KEY,
+# or run:  python play.py --save-key gemini
+brain: builtin
+brain_power: smart
+model: ''
+
+# Safety limits for each session
+max_minutes: 20
+max_ai_calls: 600

@@ -1,0 +1,23 @@
+name: PlayFellow Arena · Ray Maze
+name_ar: ساحة بلاي فيلو · متاهة الأشعة
+genre: first_person
+game_hint: >
+  A maze seen through your own eyes (first person). Purple walls; the small map in the top-left corner shows the
+  maze from above, with you as the lime arrow. Red circles are targets; yellow circles are ammo boxes. Space shoots
+  straight ahead and hits the first target before a wall. Ammo is limited (shown at the top): walk over a yellow box
+  for 2 more. Hit all 5 targets, then walk through the green exit door (it stays dark green and shut until then).
+  Each key press moves one square or turns a quarter turn. Targets only - this is a practice range.
+game_hint_ar: >
+  متاهة تراها بعينيك (منظور الشخص الأول). الجدران بنفسجية؛ والخريطة الصغيرة في الزاوية العليا تُظهر المتاهة من الأعلى،
+  وأنت السهم الأخضر الفاتح. الدوائر الحمراء أهداف؛ والدوائر الصفراء صناديق ذخيرة. المسافة تطلق للأمام مباشرة وتصيب أول
+  هدف قبل الجدار. الذخيرة محدودة (معروضة في الأعلى): امشِ فوق صندوق أصفر لتحصل على 2 إضافيتين. أصب الأهداف الخمسة كلها،
+  ثم امشِ عبر باب الخروج الأخضر (يبقى أخضر داكنًا ومغلقًا حتى ذلك الحين). كل ضغطة تحركك مربعًا أو تديرك ربع دورة.
+  أهداف فقط - هذا ميدان تدريب.
+actions:
+  FORWARD:    {keys: w,     hold: 0.05, says: "step forward", says_ar: "تقدّم خطوة"}
+  BACK:       {keys: s,     hold: 0.05, says: "step back", says_ar: "ارجع خطوة"}
+  STEP_LEFT:  {keys: a,     hold: 0.05, says: "step sideways to your left", says_ar: "خطوة جانبية إلى يسارك"}
+  STEP_RIGHT: {keys: d,     hold: 0.05, says: "step sideways to your right", says_ar: "خطوة جانبية إلى يمينك"}
+  TURN_LEFT:  {keys: left,  hold: 0.05, says: "turn a quarter left", says_ar: "استدر ربع دورة لليسار"}
+  TURN_RIGHT: {keys: right, hold: 0.05, says: "turn a quarter right", says_ar: "استدر ربع دورة لليمين"}
+  SHOOT:      {keys: space, hold: 0.05, says: "shoot straight ahead", says_ar: "أطلق للأمام مباشرة"}

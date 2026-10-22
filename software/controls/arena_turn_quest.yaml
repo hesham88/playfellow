@@ -1,0 +1,20 @@
+name: PlayFellow Arena · Turn Quest
+name_ar: ساحة بلاي فيلو · مغامرة الأدوار
+genre: rpg
+game_hint: >
+  A menu adventure. The purple bar is the menu choice; up/down move it and Enter chooses it. In town you can fight a
+  slime (for experience and gold), visit the shop (potions, a sword), rest at the inn (full health for 10 gold) or
+  fight the dragon. In a battle: Attack, Fire (uses 5 MP, strong), Potion (heals 20) or Run (not from the dragon).
+  The top line shows your level, HP, MP, gold and potions; the red bar is the enemy's health. The dragon is very
+  strong: get to level 4, buy the sword and some potions, rest first, then fight it. Esc leaves the shop.
+game_hint_ar: >
+  مغامرة بالقوائم. الشريط البنفسجي هو الخيار المحدد؛ الأعلى/الأسفل يحركانه وEnter يختاره. في البلدة يمكنك قتال وحش
+  هلامي (للخبرة والذهب)، أو زيارة المتجر (جرعات، سيف)، أو الاستراحة في النُزُل (صحة كاملة مقابل 10 ذهب)، أو قتال التنين.
+  في المعركة: هجوم، نار (تستهلك 5 طاقة، قوية)، جرعة (تشفي 20) أو هروب (ليس من التنين).
+  السطر العلوي يعرض مستواك وصحتك وطاقتك وذهبك وجرعاتك؛ والشريط الأحمر صحة العدو. التنين قوي جدًا:
+  صِل إلى المستوى 4 واشترِ السيف وبعض الجرعات واسترح أولًا، ثم قاتله. Esc يخرجك من المتجر.
+actions:
+  UP:     {keys: up,    hold: 0.05, says: "move the menu choice up", says_ar: "حرّك الاختيار لأعلى"}
+  DOWN:   {keys: down,  hold: 0.05, says: "move the menu choice down", says_ar: "حرّك الاختيار لأسفل"}
+  CHOOSE: {keys: enter, hold: 0.05, says: "do the chosen menu option", says_ar: "نفّذ الخيار المحدد"}
+  BACK:   {keys: esc,   hold: 0.05, says: "leave the shop", says_ar: "اخرج من المتجر"}

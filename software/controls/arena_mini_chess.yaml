@@ -1,0 +1,17 @@
+name: PlayFellow Arena · Mini Chess
+name_ar: ساحة بلاي فيلو · شطرنج صغير
+genre: board
+game_hint: >
+  A chess board seen from above. You play White (the light circles, at the bottom) against the computer (the dark
+  circles). Letters show the piece: K king, Q queen, R rook, B bishop, N knight, P pawn. To move, click one of your
+  pieces (its square turns purple), then click the square to move it to. Illegal moves do nothing. The computer
+  answers at once; the green squares show the last move. Win by checkmate, or by playing 30 moves without being
+  checkmated. Protect your king and don't give pieces away for free. Against the computer only, never people.
+game_hint_ar: >
+  رقعة شطرنج نراها من الأعلى. أنت تلعب بالأبيض (الدوائر الفاتحة في الأسفل) ضد الحاسوب (الدوائر الداكنة).
+  الحروف تبيّن القطعة: K الملك، Q الوزير، R القلعة، B الفيل، N الحصان، P الجندي. لتتحرك، انقر إحدى قطعك
+  (يصبح مربعها بنفسجيًا)، ثم انقر المربع الذي تريد نقلها إليه. النقلات غير المسموحة لا تفعل شيئًا. يرد الحاسوب فورًا؛
+  والمربعات الخضراء تبيّن آخر نقلة. افز بكش مات، أو بلعب 30 نقلة دون أن يُكش ملكك. احمِ ملكك ولا تخسر قطعًا مجانًا.
+  ضد الحاسوب فقط، وليس ضد أشخاص أبدًا.
+actions:
+  CLICK: {click: left, says: "click a square (first your piece, then where it goes)", says_ar: "انقر مربعًا (أولًا قطعتك، ثم مكانها الجديد)"}

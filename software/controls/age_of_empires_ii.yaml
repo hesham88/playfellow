@@ -1,0 +1,35 @@
+# Age of Empires II: Definitive Edition (PC, single-player vs the computer AI) - default mouse + hotkeys.
+# Sources: https://www.ageofempires.com/learn-to-play/match-goals-aoe2/ (official "Match Goals & Hotkeys":
+#          H selects the Town Center, Q there trains a Villager; with a Villager, Q opens economic buildings,
+#          then Q places a House and A a Farm; W opens military buildings) and https://ageofempires.fandom.com/wiki/Hotkey.
+# Left click selects, right click commands (move, gather, attack), arrow keys scroll the map.
+# The idle-villager key (.) is not on our key list, so it is left out. Matches against the computer only.
+name: Age of Empires II DE
+name_ar: إيج أوف إمباير 2
+genre: strategy_rts
+window: age of empires ii
+default_goal: Grow your economy - keep the Town Center training villagers, gather food and wood, and build houses before you run out of room.
+default_goal_ar: نمِّ اقتصادك - اجعل مركز المدينة يدرّب القرويين باستمرار، واجمع الطعام والخشب، وابنِ المنازل قبل أن ينفد المكان.
+game_hint: >
+  A real-time strategy game seen from above at an angle. The top bar shows your stockpiles (wood, food, gold, stone),
+  population (used/available) and the current Age. The bottom panel shows what is selected and its commands; the
+  minimap is bottom-right. Click a unit or building to select it; right-click the ground to move, a resource (trees,
+  berries, sheep) to gather, or an enemy to attack. Population is capped by houses: build more before it fills.
+  Single-player against the computer only.
+game_hint_ar: >
+  لعبة استراتيجية في الوقت الحقيقي نراها من الأعلى بزاوية. الشريط العلوي يعرض مخزونك (خشب، طعام، ذهب، حجر) والسكان
+  (المستخدم/المتاح) والعصر الحالي. اللوحة السفلية تعرض ما حددته وأوامره؛ والخريطة الصغيرة أسفل اليمين. انقر وحدة أو مبنى لتحدده؛
+  وانقر بالزر الأيمن على الأرض للتحرك، أو على مورد (أشجار، توت، أغنام) للجمع، أو على عدو للهجوم. السكان محدودون بالمنازل:
+  ابنِ المزيد قبل أن يمتلئوا. لاعب واحد ضد الحاسوب فقط.
+actions:
+  SELECT:       {click: left,  says: "click to select a unit or building (or a button)", says_ar: "انقر لتحديد وحدة أو مبنى (أو زر)"}
+  COMMAND:      {click: right, says: "right-click: move there / gather this / attack this", says_ar: "انقر بالأيمن: تحرك هناك / اجمع هذا / هاجم هذا"}
+  TOWN_CENTER:  {keys: h, hold: 0.05, says: "jump to and select the Town Center", says_ar: "انتقل إلى مركز المدينة وحدده"}
+  Q_KEY:        {keys: q, hold: 0.05, says: "Q: train a villager (Town Center) / economic buildings menu (villager) / house (in that menu)", says_ar: "Q: درّب قرويًا (مركز المدينة) / قائمة المباني الاقتصادية (قروي) / منزل (داخل القائمة)"}
+  FARM:         {keys: a, hold: 0.05, says: "in the economic buildings menu: place a farm", says_ar: "في قائمة المباني الاقتصادية: ضع مزرعة"}
+  MILITARY:     {keys: w, hold: 0.05, says: "with a villager: military buildings menu", says_ar: "مع قروي: قائمة المباني العسكرية"}
+  SCROLL_UP:    {keys: up,    hold: 0.4, says: "scroll the map up", says_ar: "حرّك الخريطة لأعلى"}
+  SCROLL_DOWN:  {keys: down,  hold: 0.4, says: "scroll the map down", says_ar: "حرّك الخريطة لأسفل"}
+  SCROLL_LEFT:  {keys: left,  hold: 0.4, says: "scroll the map left", says_ar: "حرّك الخريطة لليسار"}
+  SCROLL_RIGHT: {keys: right, hold: 0.4, says: "scroll the map right", says_ar: "حرّك الخريطة لليمين"}
+  WAIT:         {wait: 1.0, says: "wait and watch the economy", says_ar: "انتظر وراقب الاقتصاد"}

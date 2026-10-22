@@ -1,0 +1,16 @@
+name: PlayFellow Arena · Slide 2048
+name_ar: ساحة بلاي فيلو · انزلاق 2048
+genre: puzzle
+game_hint: >
+  A 4 by 4 board of numbered tiles. An arrow press slides every tile that way; two equal tiles that touch join
+  into one with double the number. After each move a new 2 (or 4) appears. Reach a 256 tile to win.
+  Tip: keep your biggest tile in one corner. If a move changes nothing, it doesn't count.
+game_hint_ar: >
+  لوحة 4 في 4 من المربعات المرقّمة. كل ضغطة سهم تحرّك كل المربعات في ذلك الاتجاه؛ مربعان متساويان يتلامسان
+  يندمجان في مربع واحد بضعف الرقم. بعد كل حركة يظهر 2 (أو 4) جديد. صِل إلى مربع 256 لتفوز.
+  نصيحة: أبقِ أكبر مربع في زاوية واحدة. الحركة التي لا تغيّر شيئًا لا تُحسب.
+actions:
+  UP:    {keys: up,    hold: 0.08, says: "slide all tiles up", says_ar: "حرّك كل المربعات لأعلى"}
+  DOWN:  {keys: down,  hold: 0.08, says: "slide all tiles down", says_ar: "حرّك كل المربعات لأسفل"}
+  LEFT:  {keys: left,  hold: 0.08, says: "slide all tiles left", says_ar: "حرّك كل المربعات لليسار"}
+  RIGHT: {keys: right, hold: 0.08, says: "slide all tiles right", says_ar: "حرّك كل المربعات لليمين"}

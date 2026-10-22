@@ -1,0 +1,17 @@
+# PlayFellow research core: Windows 10/11, tested with Python 3.13.
+numpy>=2.0
+Pillow>=10.1
+PyYAML>=6.0
+mss>=9.0
+PyGetWindow>=0.0.9
+pydirectinput>=1.0.4
+pynput>=1.7
+pygame>=2.6
+keyring>=25.0
+arabic-reshaper>=3.0
+python-bidi>=0.4
+# The AI brains. The built-in brain needs none of them; each cloud brain needs your own key.
+google-genai>=1.0
+anthropic
+openai
+ollama

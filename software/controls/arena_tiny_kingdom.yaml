@@ -1,0 +1,19 @@
+name: PlayFellow Arena · Tiny Kingdom
+name_ar: ساحة بلاي فيلو · المملكة الصغيرة
+genre: strategy_turn
+game_hint: >
+  A turn-based defence game seen from above. The grey column on the left is your castle wall; red triangles are
+  enemies walking left towards it, one square per turn. To build: click a button at the bottom (Farm, Tower or
+  Soldier; it turns purple), then click a green square. Farms (yellow) give 2 more gold every turn; towers (purple)
+  shoot an enemy within 2 squares each turn; soldiers (cyan circles) block a square and fight. Press Enter to end
+  your turn. A new wave comes every 3 turns, each bigger. Survive all 10 waves without losing the castle (5 hits).
+  Tip: farms first, then towers behind a line of soldiers.
+game_hint_ar: >
+  لعبة دفاع بالأدوار نراها من الأعلى. العمود الرمادي على اليسار سور قلعتك؛ والمثلثات الحمراء أعداء يمشون يسارًا نحوه،
+  مربعًا في كل دور. للبناء: انقر زرًا في الأسفل (مزرعة أو برج أو جندي؛ يصبح بنفسجيًا)، ثم انقر مربعًا أخضر.
+  المزارع (الصفراء) تعطي 2 ذهب إضافية كل دور؛ والأبراج (البنفسجية) تضرب عدوًا ضمن مربعين كل دور؛ والجنود (الدوائر الزرقاء)
+  يسدّون مربعًا ويقاتلون. اضغط Enter لإنهاء دورك. موجة جديدة كل 3 أدوار، وكل موجة أكبر. اصمد أمام 10 موجات دون أن تسقط
+  القلعة (5 ضربات). نصيحة: المزارع أولًا، ثم الأبراج خلف صف من الجنود.
+actions:
+  CLICK:    {click: left, says: "click a build button or a square", says_ar: "انقر زر بناء أو مربعًا"}
+  END_TURN: {keys: enter, hold: 0.05, says: "end your turn", says_ar: "أنهِ دورك"}

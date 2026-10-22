@@ -1,0 +1,19 @@
+name: PlayFellow Arena · Lane Dash
+name_ar: ساحة بلاي فيلو · سباق المسارات
+genre: endless_runner
+game_hint: >
+  Seen from above, running up the screen on three lanes. You are the purple block at the bottom; things come down
+  towards you. Red blocks are trains: change lane. Orange bars at the bottom of a lane are low barriers: jump (up).
+  Cyan bars at the top of a lane are high barriers: slide (down). Gold dots are coins: run into them.
+  Survive 60 seconds and collect 30 coins. A jump or a slide lasts a moment; you can't slide while in the air.
+game_hint_ar: >
+  نراها من الأعلى، والجري نحو أعلى الشاشة في ثلاثة مسارات. أنت المربع البنفسجي في الأسفل؛ والأشياء تنزل نحوك.
+  المربعات الحمراء قطارات: غيّر المسار. القضبان البرتقالية في أسفل المسار حواجز منخفضة: اقفز (أعلى).
+  القضبان الزرقاء في أعلى المسار حواجز عالية: انزلق (أسفل). النقاط الذهبية عملات: اركض نحوها.
+  ابقَ 60 ثانية واجمع 30 عملة. القفزة أو الانزلاق يستمر لحظة؛ لا يمكنك الانزلاق وأنت في الهواء.
+actions:
+  LEFT:  {keys: left,  hold: 0.05, says: "move one lane left", says_ar: "انتقل مسارًا لليسار"}
+  RIGHT: {keys: right, hold: 0.05, says: "move one lane right", says_ar: "انتقل مسارًا لليمين"}
+  JUMP:  {keys: up,    hold: 0.05, says: "jump over a low barrier", says_ar: "اقفز فوق حاجز منخفض"}
+  SLIDE: {keys: down,  hold: 0.05, says: "slide under a high barrier", says_ar: "انزلق تحت حاجز عالٍ"}
+  WAIT:  {wait: 0.1, says: "keep running in this lane", says_ar: "استمر في الجري في هذا المسار"}

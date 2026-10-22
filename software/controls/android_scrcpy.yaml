@@ -1,0 +1,34 @@
+# Android phone or tablet shown on the PC with scrcpy (touch games: Subway Surfers, Asphalt and so on).
+# SETUP (once; the buddy never changes any phone setting):
+#   1. On the phone: Settings -> About phone -> tap "Build number" 7 times, then Settings -> Developer options ->
+#      switch on "USB debugging". Plug the phone into the PC and allow the debugging question on the phone.
+#   2. Start scrcpy from a folder you trust, with the window name below so PlayFellow can recognise it:
+#          scrcpy --window-title "scrcpy"
+#      (Without that, scrcpy names its window after the phone and PlayFellow will not treat it as a stream.)
+#   3. Only single-player offline games. Turn USB debugging off again when you are done.
+# The buddy swipes and taps inside that window only; a swipe never leaves the window.
+name: Android phone (scrcpy)
+name_ar: هاتف أندرويد (scrcpy)
+window: scrcpy
+genre: other
+default_goal: Play the phone game with the player, with swipes and taps, and ask if a screen is unclear.
+default_goal_ar: العب لعبة الهاتف مع اللاعب بالسحب والنقر، واسأل إذا لم تكن الشاشة واضحة.
+game_hint: >
+  A phone screen mirrored into a window on the PC. Swipe with the SWIPE actions, tap with TAP (give x and y from 0 to 1000
+  on the picture), and drag with DRAG (x,y to x2,y2). Right-click is the Back button and middle-click is Home.
+  Never buy anything, never open the shop, and never change phone settings. If a payment or sign-in screen appears,
+  stop and tell the player.
+game_hint_ar: >
+  شاشة هاتف معروضة في نافذة على الحاسوب. اسحب بإجراءات SWIPE وانقر بـ TAP (أعطِ x و y من 0 إلى 1000 على الصورة)
+  واسحب بـ DRAG (من x,y إلى x2,y2). النقر بزر الفأرة الأيمن هو زر الرجوع والنقر بالأوسط هو الشاشة الرئيسية.
+  لا تشترِ أي شيء ولا تفتح المتجر ولا تغيّر إعدادات الهاتف. إذا ظهرت شاشة دفع أو تسجيل دخول فتوقف وأخبر اللاعب.
+actions:
+  TAP:         {click: left, says: "tap a spot on the phone screen", says_ar: "انقر نقطة على شاشة الهاتف"}
+  DRAG:        {drag: {ms: 400}, says: "drag from one spot to another", says_ar: "اسحب من نقطة إلى أخرى"}
+  SWIPE_LEFT:  {swipe: {from: [800, 500], to: [200, 500], ms: 250}, says: "swipe left", says_ar: "اسحب لليسار"}
+  SWIPE_RIGHT: {swipe: {from: [200, 500], to: [800, 500], ms: 250}, says: "swipe right", says_ar: "اسحب لليمين"}
+  SWIPE_UP:    {swipe: {from: [500, 800], to: [500, 200], ms: 250}, says: "swipe up", says_ar: "اسحب لأعلى"}
+  SWIPE_DOWN:  {swipe: {from: [500, 200], to: [500, 800], ms: 250}, says: "swipe down", says_ar: "اسحب لأسفل"}
+  BACK:        {mouse_button: right, says: "press the Back button", says_ar: "اضغط زر الرجوع"}
+  HOME:        {mouse_button: middle, says: "press the Home button", says_ar: "اضغط زر الشاشة الرئيسية"}
+  WAIT:        {wait: 0.5, says: "wait a moment", says_ar: "انتظر لحظة"}

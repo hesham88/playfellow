@@ -1,0 +1,51 @@
+# Minecraft: Java Edition (single-player) - default keyboard + mouse controls.
+# Source: https://minecraft.wiki/w/Controls (Minecraft Wiki - Controls, Java Edition defaults).
+# W/A/S/D move, Space jump, Left Shift sneak, Left Ctrl sprint, left mouse attack/destroy, right mouse use/place,
+# E inventory, Q drop item, 1-9 hotbar, the mouse moves the camera, Esc pause.
+# Single-player worlds only (never multiplayer servers).
+name: Minecraft (Java Edition)
+name_ar: ماينكرافت (إصدار جافا)
+genre: sandbox
+window: minecraft
+default_goal: Survive your first day - get wood from a tree, make a crafting table and wooden tools, and build a shelter before night.
+default_goal_ar: انجُ في يومك الأول - احصل على الخشب من شجرة، واصنع طاولة صناعة وأدوات خشبية، وابنِ مأوى قبل الليل.
+game_hint: >
+  A first-person world made of blocks. The crosshair in the middle is where you aim. Bottom HUD: hearts (health),
+  drumsticks (hunger) and the 9-slot hotbar (the selected slot has a white frame). Hold the left mouse button on a
+  block to break it; right-click to place the block in your hand or use an item. Monsters come out at night: have a
+  shelter or a light. Single-player only.
+game_hint_ar: >
+  عالم من المكعبات بمنظور الشخص الأول. علامة التصويب في المنتصف هي مكان التصويب. في الأسفل: القلوب (الصحة) وأفخاذ الدجاج
+  (الجوع) وشريط الأدوات بتسع خانات (المحددة بإطار أبيض). اضغط مطولًا بزر الفأرة الأيسر على مكعب لتكسره؛ وانقر بالأيمن لتضع
+  المكعب الذي في يدك أو تستخدم شيئًا. الوحوش تخرج ليلًا: جهّز مأوى أو إضاءة. لاعب واحد فقط.
+actions:
+  FORWARD:      {keys: w,     hold: 0.4, says: "walk forward a little", says_ar: "امشِ للأمام قليلًا"}
+  BACK:         {keys: s,     hold: 0.4, says: "walk back a little", says_ar: "امشِ للخلف قليلًا"}
+  STRAFE_LEFT:  {keys: a,     hold: 0.3, says: "step left", says_ar: "خطوة لليسار"}
+  STRAFE_RIGHT: {keys: d,     hold: 0.3, says: "step right", says_ar: "خطوة لليمين"}
+  JUMP:         {keys: space, hold: 0.1, says: "jump", says_ar: "اقفز"}
+  SPRINT:       {keys: [ctrl, w], hold: 0.8, says: "sprint forward", says_ar: "اركض للأمام"}
+  WALK_ON:      {hold_start: w, says: "keep walking forward", says_ar: "استمر في المشي للأمام"}
+  WALK_OFF:     {hold_stop: w,  says: "stop walking", says_ar: "توقف عن المشي"}
+  SNEAK_ON:     {hold_start: shift, says: "sneak (you will not fall off edges)", says_ar: "تسلّل (لن تسقط من الحواف)"}
+  SNEAK_OFF:    {hold_stop: shift,  says: "stop sneaking", says_ar: "توقف عن التسلل"}
+  RELEASE_ALL:  {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  ATTACK:       {click: left,  says: "hit what is under the crosshair", says_ar: "اضرب ما تحت علامة التصويب"}
+  BREAK_BLOCK:  {mouse_button: left, says: "hold to break the block under the crosshair", says_ar: "اضغط مطولًا لتكسر المكعب تحت علامة التصويب"}
+  USE_PLACE:    {click: right, says: "use the item or place the block in your hand", says_ar: "استخدم الشيء أو ضع المكعب الذي في يدك"}
+  LOOK_LEFT:    {mouse_move: [-200, 0], says: "turn the camera left", says_ar: "أدر الكاميرا لليسار"}
+  LOOK_RIGHT:   {mouse_move: [200, 0],  says: "turn the camera right", says_ar: "أدر الكاميرا لليمين"}
+  LOOK_UP:      {mouse_move: [0, -120], says: "look up", says_ar: "انظر لأعلى"}
+  LOOK_DOWN:    {mouse_move: [0, 120],  says: "look down", says_ar: "انظر لأسفل"}
+  INVENTORY:    {keys: e, hold: 0.05, says: "open or close the inventory (crafting)", says_ar: "افتح الحقيبة أو أغلقها (الصناعة)"}
+  DROP:         {keys: q, hold: 0.05, says: "drop the selected item", says_ar: "أسقط الشيء المحدد"}
+  SLOT_1:       {keys: "1", hold: 0.05, says: "hotbar slot 1", says_ar: "خانة الأدوات 1"}
+  SLOT_2:       {keys: "2", hold: 0.05, says: "hotbar slot 2", says_ar: "خانة الأدوات 2"}
+  SLOT_3:       {keys: "3", hold: 0.05, says: "hotbar slot 3", says_ar: "خانة الأدوات 3"}
+  SLOT_4:       {keys: "4", hold: 0.05, says: "hotbar slot 4", says_ar: "خانة الأدوات 4"}
+  SLOT_5:       {keys: "5", hold: 0.05, says: "hotbar slot 5", says_ar: "خانة الأدوات 5"}
+  SLOT_6:       {keys: "6", hold: 0.05, says: "hotbar slot 6", says_ar: "خانة الأدوات 6"}
+  SLOT_7:       {keys: "7", hold: 0.05, says: "hotbar slot 7", says_ar: "خانة الأدوات 7"}
+  SLOT_8:       {keys: "8", hold: 0.05, says: "hotbar slot 8", says_ar: "خانة الأدوات 8"}
+  SLOT_9:       {keys: "9", hold: 0.05, says: "hotbar slot 9", says_ar: "خانة الأدوات 9"}
+  WAIT:         {wait: 0.5, says: "wait and look", says_ar: "انتظر وانظر"}

@@ -1,0 +1,37 @@
+# Mortal Kombat 1 (2023, PC) - default keyboard controls.
+# Source: https://gamertagzero.com/mortal-kombat-1-best-pc-keyboard-controls/ (lists the PC keyboard defaults:
+#         W/A/S/D move, J front punch, I back punch, K front kick, L back kick, Space throw/grab, O block).
+#         VERIFY once in the game's Controls menu. The Kameo key (;) is not on our key list, so it is left out.
+# Towers / story / practice against the computer only.
+name: Mortal Kombat 1
+name_ar: مورتال كومبات 1
+genre: fighting
+window: mortal kombat
+default_goal: Win the fight against the computer - block its attacks and punish with your own.
+default_goal_ar: افز بالقتال ضد الحاسوب - اصدّ هجماته وعاقبه بهجماتك.
+game_hint: >
+  A 1-on-1 fighting game seen from the side. Health bars are at the top (yours on the left); the round timer is in
+  the middle; the meter at the bottom fills for enhanced moves. D walks towards the opponent when you face right
+  (A walks back); W jumps, S crouches. J/I are front/back punch, K/L are front/back kick, Space throws, hold O to
+  block. Special moves are short sequences like "back, forward, front punch": send them as several actions in one
+  turn, in order. Fights against the computer only.
+game_hint_ar: >
+  لعبة قتال فردي نراها من الجانب. أشرطة الصحة في الأعلى (شريطك على اليسار)؛ ومؤقت الجولة في الوسط؛ والعداد في الأسفل يمتلئ
+  للحركات المعززة. D يمشي نحو الخصم عندما تواجه اليمين (A يمشي للخلف)؛ W للقفز وS للانحناء. J/I لكمة أمامية/خلفية، وK/L ركلة
+  أمامية/خلفية، والمسافة للرمي، واضغط O مطولًا للصد. الحركات الخاصة تسلسلات قصيرة مثل "خلف، أمام، لكمة أمامية":
+  أرسلها كعدة أفعال في دور واحد بالترتيب. القتال ضد الحاسوب فقط.
+actions:
+  FORWARD:     {keys: d, hold: 0.12, says: "step forward (facing right)", says_ar: "خطوة للأمام (عند مواجهة اليمين)"}
+  BACK:        {keys: a, hold: 0.12, says: "step back (facing right)", says_ar: "خطوة للخلف (عند مواجهة اليمين)"}
+  JUMP:        {keys: w, hold: 0.08, says: "jump", says_ar: "اقفز"}
+  CROUCH:      {keys: s, hold: 0.3,  says: "crouch", says_ar: "انحنِ"}
+  FRONT_PUNCH: {keys: j, hold: 0.05, says: "front punch", says_ar: "لكمة أمامية"}
+  BACK_PUNCH:  {keys: i, hold: 0.05, says: "back punch", says_ar: "لكمة خلفية"}
+  FRONT_KICK:  {keys: k, hold: 0.05, says: "front kick", says_ar: "ركلة أمامية"}
+  BACK_KICK:   {keys: l, hold: 0.05, says: "back kick", says_ar: "ركلة خلفية"}
+  THROW:       {keys: space, hold: 0.05, says: "throw (when close)", says_ar: "رمي (عند الاقتراب)"}
+  BLOCK:       {keys: o, hold: 0.5, says: "block for a moment", says_ar: "صدّ لحظة"}
+  BLOCK_ON:    {hold_start: o, says: "keep blocking", says_ar: "استمر في الصد"}
+  BLOCK_OFF:   {hold_stop: o,  says: "stop blocking", says_ar: "توقف عن الصد"}
+  RELEASE_ALL: {release_all: true, says: "let go of every held key", says_ar: "اترك كل المفاتيح المضغوطة"}
+  WAIT:        {wait: 0.2, says: "wait and watch", says_ar: "انتظر وراقب"}

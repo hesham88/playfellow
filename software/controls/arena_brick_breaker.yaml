@@ -1,0 +1,17 @@
+name: PlayFellow Arena · Brick Breaker
+name_ar: ساحة بلاي فيلو · كاسر الطوب
+genre: arcade
+game_hint: >
+  Seen from the front. The purple bar at the bottom is your paddle; the white dot is the ball; the coloured blocks
+  are bricks (pink ones need two hits). Press space to launch the ball. Move the paddle left and right to be under
+  the ball when it comes down; where it hits the paddle sets the angle (the edges send it sideways). Break every brick
+  to finish a level; there are 2 levels. If the ball falls past the paddle you lose a life (3 lives).
+game_hint_ar: >
+  نراها من الأمام. الشريط البنفسجي في الأسفل مضربك؛ والنقطة البيضاء الكرة؛ والمربعات الملونة طوب (الوردي يحتاج ضربتين).
+  اضغط المسافة لإطلاق الكرة. حرّك المضرب يمينًا ويسارًا لتكون تحت الكرة عندما تنزل؛ مكان ضربها على المضرب يحدد الزاوية
+  (الحواف ترسلها جانبًا). اكسر كل الطوب لتنهي المستوى؛ هناك مستويان. إذا سقطت الكرة بعد المضرب تخسر روحًا (3 أرواح).
+actions:
+  LEFT:   {keys: left,  hold: 0.03, says: "move the paddle left", says_ar: "حرّك المضرب لليسار"}
+  RIGHT:  {keys: right, hold: 0.03, says: "move the paddle right", says_ar: "حرّك المضرب لليمين"}
+  LAUNCH: {keys: space, hold: 0.03, says: "launch the ball", says_ar: "أطلق الكرة"}
+  WAIT:   {wait: 0.05, says: "keep the paddle still", says_ar: "أبقِ المضرب ثابتًا"}

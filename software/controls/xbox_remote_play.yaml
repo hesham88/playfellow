@@ -1,0 +1,31 @@
+# Xbox Remote Play / Xbox Cloud Gaming: an Xbox shown in a window on this PC (the window must be titled exactly
+# "Xbox Remote Play" or "Xbox Cloud Gaming"; the plain "Xbox" app, the Microsoft Store and browser tabs stay blocked).
+# The buddy presses KEYBOARD keys in that window and the stream program turns them into controller buttons. CHECK THE KEYS
+# BELOW against your setup and edit this card if they differ; the defaults are a common layout and have not been checked
+# on every setup yet. Games on a console are often online with real people: you see the online warning first.
+name: Xbox Remote Play
+name_ar: إكس بوكس ريموت بلاي
+window: Xbox Remote Play
+genre: other
+default_goal: Help the player in the game on the console, carefully, and ask if a screen is unclear.
+default_goal_ar: ساعد اللاعب في اللعبة على الجهاز بحذر، واسأل إذا لم تكن الشاشة واضحة.
+game_hint: >
+  An Xbox game streamed into a window on the PC. Use the D-pad keys to move through menus and the face buttons to choose.
+  A confirms, B goes back. Never buy anything, never sign in, and never change console settings.
+  If a store, a payment or a sign-in screen appears, stop and tell the player.
+game_hint_ar: >
+  لعبة إكس بوكس تُبثّ إلى نافذة على الحاسوب. استخدم مفاتيح الأسهم للتنقل في القوائم وأزرار الوجه للاختيار.
+  زر A يؤكد وزر B يرجع للخلف. لا تشترِ أي شيء ولا تسجّل الدخول ولا تغيّر إعدادات الجهاز.
+  إذا ظهرت شاشة متجر أو دفع أو تسجيل دخول فتوقف وأخبر اللاعب.
+actions:
+  UP:    {keys: up,    hold: 0.12, says: "D-pad up", says_ar: "السهم لأعلى"}
+  DOWN:  {keys: down,  hold: 0.12, says: "D-pad down", says_ar: "السهم لأسفل"}
+  LEFT:  {keys: left,  hold: 0.12, says: "D-pad left", says_ar: "السهم لليسار"}
+  RIGHT: {keys: right, hold: 0.12, says: "D-pad right", says_ar: "السهم لليمين"}
+  A:     {keys: enter, hold: 0.12, says: "press A (confirm)", says_ar: "اضغط زر A (تأكيد)"}
+  B:     {keys: backspace, hold: 0.12, says: "press B (back)", says_ar: "اضغط زر B (رجوع)"}
+  X:     {keys: a,     hold: 0.12, says: "press X", says_ar: "اضغط زر X"}
+  Y:     {keys: s,     hold: 0.12, says: "press Y", says_ar: "اضغط زر Y"}
+  LB:    {keys: q,     hold: 0.12, says: "press LB", says_ar: "اضغط LB"}
+  RB:    {keys: e,     hold: 0.12, says: "press RB", says_ar: "اضغط RB"}
+  WAIT:  {wait: 0.5, says: "wait a moment", says_ar: "انتظر لحظة"}

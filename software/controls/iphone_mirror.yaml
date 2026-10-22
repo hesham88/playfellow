@@ -1,0 +1,25 @@
+# iPhone shown on a Mac with macOS "iPhone Mirroring" (the window is titled exactly "iPhone Mirroring").
+# This is for a Mac; on Windows an iPhone cannot be controlled this way. The buddy swipes and taps inside that window
+# only. Single-player offline games, never anything that buys or signs in. The buddy never changes phone settings.
+name: iPhone Mirroring
+name_ar: عرض الآيفون
+window: iPhone Mirroring
+genre: other
+default_goal: Play the phone game with the player, with swipes and taps, and ask if a screen is unclear.
+default_goal_ar: العب لعبة الهاتف مع اللاعب بالسحب والنقر، واسأل إذا لم تكن الشاشة واضحة.
+game_hint: >
+  An iPhone screen mirrored into a window on the Mac. Swipe with the SWIPE actions, tap with TAP (give x and y from 0 to
+  1000 on the picture), and drag with DRAG (x,y to x2,y2). Never buy anything, never open the App Store, and never change
+  phone settings. If a payment or sign-in screen appears, stop and tell the player.
+game_hint_ar: >
+  شاشة آيفون معروضة في نافذة على جهاز ماك. اسحب بإجراءات SWIPE وانقر بـ TAP (أعطِ x و y من 0 إلى 1000 على الصورة)
+  واسحب بـ DRAG (من x,y إلى x2,y2). لا تشترِ أي شيء ولا تفتح متجر التطبيقات ولا تغيّر إعدادات الهاتف.
+  إذا ظهرت شاشة دفع أو تسجيل دخول فتوقف وأخبر اللاعب.
+actions:
+  TAP:         {click: left, says: "tap a spot on the phone screen", says_ar: "انقر نقطة على شاشة الهاتف"}
+  DRAG:        {drag: {ms: 400}, says: "drag from one spot to another", says_ar: "اسحب من نقطة إلى أخرى"}
+  SWIPE_LEFT:  {swipe: {from: [800, 500], to: [200, 500], ms: 250}, says: "swipe left", says_ar: "اسحب لليسار"}
+  SWIPE_RIGHT: {swipe: {from: [200, 500], to: [800, 500], ms: 250}, says: "swipe right", says_ar: "اسحب لليمين"}
+  SWIPE_UP:    {swipe: {from: [500, 800], to: [500, 200], ms: 250}, says: "swipe up", says_ar: "اسحب لأعلى"}
+  SWIPE_DOWN:  {swipe: {from: [500, 200], to: [500, 800], ms: 250}, says: "swipe down", says_ar: "اسحب لأسفل"}
+  WAIT:        {wait: 0.5, says: "wait a moment", says_ar: "انتظر لحظة"}

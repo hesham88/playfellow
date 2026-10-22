@@ -1,0 +1,17 @@
+name: PlayFellow Arena · Box Push
+name_ar: ساحة بلاي فيلو · دفع الصناديق
+genre: puzzle
+game_hint: >
+  Seen from above. You are the blue circle. Brown squares are boxes; green dots are goals. Walk into a box to
+  push it one square; you can push, never pull, and only one box at a time. Put every box on a goal to finish
+  the level (the box turns green). Three levels. A box pushed into a corner is stuck: press R to restart the level.
+game_hint_ar: >
+  نراها من الأعلى. أنت الدائرة الزرقاء. المربعات البنية صناديق؛ النقاط الخضراء أهداف. امشِ نحو صندوق لتدفعه
+  مربعًا واحدًا؛ يمكنك الدفع فقط وليس السحب، وصندوقًا واحدًا في كل مرة. ضع كل صندوق على هدف لتُنهي المستوى
+  (يصبح الصندوق أخضر). ثلاثة مستويات. الصندوق المدفوع إلى زاوية يعلق: اضغط R لإعادة المستوى.
+actions:
+  UP:      {keys: up,    hold: 0.08, says: "walk or push one square up", says_ar: "امشِ أو ادفع مربعًا لأعلى"}
+  DOWN:    {keys: down,  hold: 0.08, says: "walk or push one square down", says_ar: "امشِ أو ادفع مربعًا لأسفل"}
+  LEFT:    {keys: left,  hold: 0.08, says: "walk or push one square left", says_ar: "امشِ أو ادفع مربعًا لليسار"}
+  RIGHT:   {keys: right, hold: 0.08, says: "walk or push one square right", says_ar: "امشِ أو ادفع مربعًا لليمين"}
+  RESTART: {keys: r,     hold: 0.08, says: "restart this level (when a box is stuck)", says_ar: "أعد هذا المستوى (عندما يعلق صندوق)"}
