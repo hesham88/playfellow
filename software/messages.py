@@ -59,6 +59,16 @@ MESSAGES: dict[str, tuple[str, str]] = {
         "The AI is busy right now. I'll wait {seconds} seconds and try again.",
         "الذكاء الاصطناعي مشغول الآن. سأنتظر {seconds} ثانية ثم أحاول مرة أخرى.",
     ),
+    "token_cap_minute": (
+        "That's a lot of AI questions in one minute ({detail} tokens). I'll wait {seconds} seconds before asking again.",
+        "هذه أسئلة كثيرة للذكاء الاصطناعي في دقيقة واحدة ({detail} رمز). سأنتظر {seconds} ثانية قبل أن أسأل مرة أخرى.",
+    ),
+    "token_cap_day": (
+        "Your daily AI budget is used up ({detail} tokens in the last 24 hours). Raise it in Settings, or play with the "
+        "built-in brain for now.",
+        "انتهت ميزانيتك اليومية للذكاء الاصطناعي ({detail} رمز خلال آخر 24 ساعة). ارفعها من الإعدادات، أو العب "
+        "بالعقل المدمج الآن.",
+    ),
     "offline": (
         "I can't reach the internet. Check the Wi-Fi.",
         "لا أستطيع الوصول إلى الإنترنت. تحقق من الواي فاي.",

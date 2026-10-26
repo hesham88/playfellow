@@ -48,6 +48,10 @@ class Safety:
         with self._lock:
             self.calls += 1
 
+    def elapsed(self) -> float:
+        """Seconds since start(): the round's clock, the one max_minutes is checked against."""
+        return self.clock() - self._started
+
     def check(self) -> str | None:
         if not self.stopped:
             if self.clock() - self._started >= self.max_seconds:

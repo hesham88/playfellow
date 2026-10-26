@@ -17,7 +17,6 @@ from nav.map import NavMap
 from nav.planner import Navigator
 from nav.curriculum import CurriculumScheduler
 from nav.skills import SkillLibrary
-from nav.surprise import SurpriseModule
 
 STEP_COST = 0.05  # every step costs a little, so shorter ways are worth more
 GAMMA = 0.97
@@ -83,6 +82,8 @@ class Episode:
     events: int  # HUD changes seen (treasure taken, doors opened, rooms entered…)
     efficiency: float | None = None  # oracle steps / steps (only when an oracle is given)
     kinds: dict[str, int] = field(default_factory=dict)  # how often each kind of advice was followed
+    surprise: float = 1.0  # how unpredictable the moves were, 0 (as expected) to 1 (all new): what the curriculum ranks by
+    curiosity: float = 0.0  # summed intrinsic reward (surprise plus empowerment) the moves earned
 
 
 def play_episode(world, navigator: Navigator, cap: int = 600, goal: str = "all", seed: int = 0,
@@ -110,24 +111,29 @@ def play_episode(world, navigator: Navigator, cap: int = 600, goal: str = "all",
             won = bool(info.get("won", done))  # for the scorecard only; the buddy never sees it
             break
     efficiency = (oracle_steps / steps) if (oracle_steps and won) else (0.0 if oracle_steps else None)
-    return Episode(steps, won, ended, score, events, efficiency, kinds)
+    return Episode(steps, won, ended, score, events, efficiency, kinds,
+                   surprise=getattr(navigator, "mean_surprise", 1.0), curiosity=getattr(navigator, "episode_curiosity", 0.0))
 
 
 def practice(world, navigator: Navigator, episodes: int = 5, cap: int = 600, seed: int = 0,
-             oracle_steps: int | None = None, save: bool = True, curriculum=None) -> list[Episode]:
-    """Repeat the same game `episodes` times, learning all along; saves the map after each one."""
+             oracle_steps: int | None = None, save: bool = True,
+             curriculum: CurriculumScheduler | None = None) -> list[Episode]:
+    """Practise up to `episodes` times, learning all along; saves the map after each one.
+
+    Without a curriculum every episode replays `seed`. With one (the LEGENT / Voyager idea), the curriculum picks each
+    episode's seed by need (surprising and unwon first, least practised first), learns from the navigator's own
+    surprise, and practice stops as soon as everything is mastered."""
     results = []
     for _ in range(episodes):
-        ep = play_episode(world, navigator, cap, seed=seed, oracle_steps=oracle_steps)
+        level, play_seed = curriculum.next_task() if curriculum is not None else (None, seed)
+        ep = play_episode(world, navigator, cap, seed=play_seed, oracle_steps=oracle_steps)
         results.append(ep)
         if curriculum is not None:
-            level_num = getattr(world.game, "number", getattr(world.game, "level_no", 1))
-            surp = 0.0
-            if hasattr(navigator, "surprise") and navigator.surprise is not None:
-                surp = getattr(navigator.surprise, "mean_surprise", 0.5)
-            curriculum.record_episode(level_num, seed, ep.won, surprise=surp, steps=ep.steps)
+            curriculum.record_episode(level, play_seed, ep.won, surprise=ep.surprise, steps=ep.steps)
         if save:
             navigator.save()
+        if curriculum is not None and curriculum.all_mastered():
+            break
     return results
 
 

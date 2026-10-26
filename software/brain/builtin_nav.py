@@ -141,10 +141,6 @@ class BuiltinNavBrain:
         rule = self.hud_bar.read(frame)  # always read: the bar remembers the previous picture
         return self.slots.decide("S2_hud", rule, (frame,), valid=lambda d: isinstance(d, dict) and isinstance(d.get("bar"), int))
 
-    @property
-    def _bar_events(self) -> int:
-        return self.hud_bar.events
-
     # ---- the player talking to me
     def _command(self, text: str) -> str:
         """'stop' or 'explore' if the player said so (the chat lines are the '- ' lines under 'The player says')."""

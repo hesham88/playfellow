@@ -7,7 +7,8 @@ import heapq
 import numpy as np
 import pytest
 
-from nav.graph4 import DELTAS, DOWN, LEFT, RIGHT, UP, EdgeGrid, direction_of, graph4_astar_py
+from graph4_reference import graph4_astar_py
+from nav.graph4 import DELTAS, DOWN, LEFT, RIGHT, UP, EdgeGrid, direction_of
 
 
 def random_costs(seed, rows=9, cols=11, wall=0.18, one_way=0.1, lumpy=True):

@@ -14,7 +14,7 @@ try:
 except ImportError:  # no native accelerator here: its tests skip
     native_bridge = None
 from nav import planner as planner_module
-from nav.graph4 import graph4_astar_py
+from graph4_reference import graph4_astar_py
 from nav.map import Edge, NavMap
 from nav.planner import Planner, Road
 

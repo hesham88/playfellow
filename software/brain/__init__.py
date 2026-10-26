@@ -12,6 +12,16 @@ from settings import BRAIN_NAMES
 REQUEST_TIMEOUT = 25  # seconds
 LOCAL_TIMEOUT = 90  # seconds
 
+# Where each brain sends the game's pictures and the player's key. Pinned on purpose (owner, 2026-10-23): the AI
+# libraries would otherwise follow OPENAI_BASE_URL, ANTHROPIC_BASE_URL, GOOGLE_GEMINI_BASE_URL or OLLAMA_HOST, which any
+# program on the PC can set. The cloud brains use HTTPS, and the local brain never leaves this PC.
+ENDPOINTS = {
+    "openai": "https://api.openai.com/v1",
+    "claude": "https://api.anthropic.com",
+    "gemini": "https://generativelanguage.googleapis.com/",
+    "local": "http://127.0.0.1:11434",
+}
+
 
 class BrainError(Exception):
     """Something went wrong talking to the AI, with a friendly message."""
@@ -110,7 +120,9 @@ class FallbackBrain:
             raise backup_error
 
 
-def make_brain(name: str, model: str, api_key: str | None, backup_model: str | None = None, is_helper: bool = False, on_event=None, clock=None, local_keep_alive: str = "30m", card=None, language: str = "english") -> Brain:
+def make_brain(name: str, model: str, api_key: str | None, backup_model: str | None = None, is_helper: bool = False, on_event=None, clock=None, local_keep_alive: str = "30m", card=None, language: str = "english", meter=None) -> Brain:
+    """One brain, or a main brain with a lighter backup. `meter` (brain/meter.py) counts every question each AI brain
+    is asked; the built-in brain is not an AI and has none."""
     if name == "builtin":  # T31-day1-brain: plays offline with no key and no model; needs the game's controls card
         if card is None:
             raise BrainError("brain_trouble", detail="the built-in brain needs the controls card")
@@ -124,31 +136,31 @@ def make_brain(name: str, model: str, api_key: str | None, backup_model: str | N
     # Build the primary brain
     if name == "gemini":
         from brain.gemini import GeminiBrain
-        primary = GeminiBrain(model, api_key, is_helper=is_helper)
+        primary = GeminiBrain(model, api_key, is_helper=is_helper, meter=meter)
     elif name == "claude":
         from brain.claude import ClaudeBrain
-        primary = ClaudeBrain(model, api_key)
+        primary = ClaudeBrain(model, api_key, meter=meter)
     elif name == "openai":
         from brain.openai_brain import OpenAIBrain
-        primary = OpenAIBrain(model, api_key)
+        primary = OpenAIBrain(model, api_key, meter=meter)
     else:
         from brain.local import LocalBrain
-        primary = LocalBrain(model, keep_alive=local_keep_alive)
+        primary = LocalBrain(model, keep_alive=local_keep_alive, meter=meter)
 
     # If backup_model is specified and different from model, return a FallbackBrain
     if backup_model and backup_model != model:
         if name == "gemini":
             from brain.gemini import GeminiBrain
-            backup = GeminiBrain(backup_model, api_key, is_helper=is_helper)
+            backup = GeminiBrain(backup_model, api_key, is_helper=is_helper, meter=meter)
         elif name == "claude":
             from brain.claude import ClaudeBrain
-            backup = ClaudeBrain(backup_model, api_key)
+            backup = ClaudeBrain(backup_model, api_key, meter=meter)
         elif name == "openai":
             from brain.openai_brain import OpenAIBrain
-            backup = OpenAIBrain(backup_model, api_key)
+            backup = OpenAIBrain(backup_model, api_key, meter=meter)
         else:
             from brain.local import LocalBrain
-            backup = LocalBrain(backup_model, keep_alive=local_keep_alive)
+            backup = LocalBrain(backup_model, keep_alive=local_keep_alive, meter=meter)
         return FallbackBrain(primary, backup, on_event=on_event, clock=clock)
 
     return primary

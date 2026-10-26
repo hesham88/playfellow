@@ -6,14 +6,19 @@ import base64
 import anthropic
 from PIL import Image
 
-from brain import REQUEST_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
+from brain import ENDPOINTS, REQUEST_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
+from brain.meter import begin, finish
 from settings import CLAUDE_FALLBACK_MODELS
 
 
 class ClaudeBrain:
-    def __init__(self, model: str, api_key: str):
+    name = "claude"
+
+    def __init__(self, model: str, api_key: str, meter=None):
         self.model = model
-        self.client = anthropic.Anthropic(api_key=api_key, timeout=REQUEST_TIMEOUT, max_retries=1)
+        self.meter = meter  # counts each question where it is asked (brain/meter.py)
+        self.client = anthropic.Anthropic(api_key=api_key, base_url=ENDPOINTS["claude"], timeout=REQUEST_TIMEOUT,
+                                          max_retries=1)
 
     def ask(self, system: str, text: str, images: list[Image.Image]) -> str:
         content = [
@@ -35,6 +40,7 @@ class ClaudeBrain:
             "output_config": {"effort": "low"},
             "messages": [{"role": "user", "content": content}],
         }
+        start = begin(self)
         try:
             if self.model in CLAUDE_FALLBACK_MODELS:
                 response = self.client.beta.messages.create(
@@ -55,8 +61,13 @@ class ClaudeBrain:
         except Exception as exc:
             raise classify_error(exc) from exc
         try:
-            if response.stop_reason == "refusal":
-                return ""
-            return "".join(block.text for block in response.content if block.type == "text")
+            refused = response.stop_reason == "refusal"  # a refusal is still a question asked and paid for
+            reply = "" if refused else "".join(block.text for block in response.content if block.type == "text")
         except (AttributeError, TypeError, IndexError) as exc:
             raise BrainError("brain_trouble", retry=True, wait_seconds=3, detail="unexpected reply from the AI") from exc
+        usage = getattr(response, "usage", None)
+        read = getattr(usage, "input_tokens", None)  # cache writes and reads are counted apart; all were read
+        cached = (getattr(usage, "cache_creation_input_tokens", None) or 0) + (getattr(usage, "cache_read_input_tokens", None) or 0)
+        finish(self, start, system, text, len(images), reply, prompt=None if read is None else read + cached,
+               completion=getattr(usage, "output_tokens", None))
+        return reply

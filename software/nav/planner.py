@@ -144,7 +144,7 @@ class Planner:
         Returns `NOT_ANSWERED` when the grid cannot do it exactly (no native search, a road that is not a one-square step
         in one room, start and goal in different rooms); the caller then uses the Python search."""
         nav = self.nav
-        if native_bridge is None or not hasattr(native_bridge, "graph4_astar"):
+        if native_bridge is None:  # graph4_astar itself says None when the library lacks the search
             return self.NOT_ANSWERED
         nav.sync_grid()
         grid = nav.grid
@@ -508,13 +508,21 @@ class Navigator:
         self.planner = Planner(self.nav, actions)
         self.surprise = surprise
         self.skills = skills
+        self.episode_errors: list[float] = []  # this episode's prediction errors (with a surprise module)
+        self.episode_curiosity = 0.0  # this episode's summed intrinsic reward (surprise plus empowerment)
 
     def for_new_level(self) -> "Navigator":
         """A navigator for a level never played: it keeps what things look like and how I move, not the places."""
         return Navigator(self.planner.actions, nav=self.nav.transferable(), surprise=self.surprise, skills=self.skills)
 
     def start(self, frame: np.ndarray, hud: dict | None = None) -> None:
+        self.episode_errors, self.episode_curiosity = [], 0.0
         self.nav.begin(frame, hud)
+
+    @property
+    def mean_surprise(self) -> float:
+        """How unpredictable this episode's moves were: 0 = all as expected, 1 = all new (or nothing measured yet)."""
+        return sum(self.episode_errors) / len(self.episode_errors) if self.episode_errors else 1.0
 
     def advise(self, frame: np.ndarray, goal: str = "all", max_actions: int = 1) -> Advice:
         if self.skills is not None:
@@ -531,7 +539,10 @@ class Navigator:
         res = self.nav.update(before, action, after, hud, done)
         if self.surprise is not None and action and before_place is not None:
             after_place = self.nav.here or "unknown"
-            self.surprise.observe(before_place, action, after_place)
+            # curiosity is scored before the move is learned (afterwards it would no longer be a surprise)
+            self.episode_curiosity += self.surprise.intrinsic_reward(before_place, action, after_place,
+                                                                     actions=self.planner.actions)
+            self.episode_errors.append(self.surprise.observe(before_place, action, after_place))
         return res
 
     def save(self) -> Path | None:

@@ -1,4 +1,4 @@
-"""Tests for AIArmor and TokenGovernor. / اختبارات درع الذكاء الاصطناعي وحارس التوكنات."""
+"""Tests for AIArmor. / اختبارات درع الذكاء الاصطناعي."""
 from __future__ import annotations
 
 import pytest

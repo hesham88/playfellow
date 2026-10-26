@@ -1,4 +1,4 @@
-"""Writes tests/data/graph4_vectors.npz: inputs and the exact answers of the reference search (nav.graph4.graph4_astar_py),
+"""Writes tests/data/graph4_vectors.npz: inputs and the exact answers of the reference search (tests/graph4_reference.py),
 for the native (Rust) pf_graph4_astar to be compared against bit for bit. Run from the software folder:
 
     python tests/make_graph4_vectors.py
@@ -21,8 +21,9 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import heapq  # noqa: E402
 
-from nav import graph4  # noqa: E402
-from nav.graph4 import DELTAS, graph4_astar_py  # noqa: E402
+import graph4_reference  # noqa: E402
+from graph4_reference import graph4_astar_py  # noqa: E402
+from nav.graph4 import DELTAS  # noqa: E402
 
 RIGHT = 1
 OUT = Path(__file__).resolve().parent / "data" / "graph4_vectors.npz"
@@ -51,11 +52,11 @@ class _LargerHFirst:
 
 
 def search_with_reversed_h(costs, start, goal):
-    real, graph4.heapq = graph4.heapq, _LargerHFirst
+    real, graph4_reference.heapq = graph4_reference.heapq, _LargerHFirst
     try:
         return graph4_astar_py(costs, start, goal)
     finally:
-        graph4.heapq = real
+        graph4_reference.heapq = real
 
 
 def h_decides_cases(rng, wanted=3):

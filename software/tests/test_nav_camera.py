@@ -8,6 +8,13 @@ from nav.camera import CameraTracker, align, estimate_grid_shift
 W, H = 320, 240
 
 
+def shift(prev_frame, curr_frame):
+    """(dx, dy, confidence) in pixels from two whole pictures, the way the self-model measures it on its blocks."""
+    cell = frames.cell_size(np.asarray(curr_frame).shape)
+    dc, dr, confidence = estimate_grid_shift(frames.shrink(prev_frame, cell), frames.shrink(curr_frame, cell))
+    return dc * cell, dr * cell, confidence
+
+
 def world(seed=0):
     """A wide, detailed picture to scroll over (random coloured blocks, like tiles)."""
     rng = np.random.default_rng(seed)
@@ -29,7 +36,7 @@ def test_finds_the_scroll(dx, dy):
     big = world()
     before = view(big, 200, 120)
     after = view(big, 200 - dx, 120 - dy)  # the camera looked the other way: the background slid by (dx, dy)
-    found_dx, found_dy, confidence = CameraTracker().estimate_shift(before, after)
+    found_dx, found_dy, confidence = shift(before, after)
     cell = frames.cell_size(before.shape)
     assert abs(found_dx - dx) <= cell and abs(found_dy - dy) <= cell
     assert confidence >= 0.45
@@ -39,21 +46,21 @@ def test_a_still_camera_gives_zero_with_full_confidence():
     big = world()
     before = view(big, 200, 120, sprite=(150, 110))
     after = view(big, 200, 120, sprite=(158, 110))  # only the sprite moved
-    assert CameraTracker().estimate_shift(before, after) == (0, 0, 1.0)
+    assert shift(before, after) == (0, 0, 1.0)
 
 
 def test_flat_background_says_nothing():
     flat = np.full((H, W, 3), 90, dtype=np.uint8)
     other = flat.copy()
     other[:, : W // 2] = (200, 200, 200)  # a big change but no detail to match
-    assert CameraTracker().estimate_shift(flat, other)[2] < 0.45
+    assert shift(flat, other)[2] < 0.45
 
 
 def test_the_sprite_and_hud_do_not_fool_it():
     big = world(1)
     before = view(big, 300, 100)
     after = view(big, 292, 100)
-    dx, _, confidence = CameraTracker().estimate_shift(before, after)
+    dx, _, confidence = shift(before, after)
     assert dx == 8 // frames.cell_size(before.shape) * frames.cell_size(before.shape) or abs(dx - 8) <= 3
     assert confidence >= 0.45
 
@@ -68,14 +75,13 @@ def test_align_removes_the_background_change():
     assert frames.changed(align(a, b, dc, dr), b).mean() < 0.05
 
 
-def test_tracker_adds_up_and_converts():
+def test_tracker_adds_up_and_converts_to_world_squares():
     tracker = CameraTracker()
     assert tracker.update(8, 0, 0.9) == (8, 0)
     assert tracker.update(8, 0, 0.9) == (8, 0)
     assert tracker.update(24, 0, 0.2) == (0, 0)  # a shaky estimate is ignored
     assert tracker.offset == (16, 0)
     assert tracker.to_world((100, 50)) == (84, 50)
-    assert tracker.to_screen((84, 50)) == (100, 50)
     tracker.reset()
     assert tracker.offset == (0, 0)
 

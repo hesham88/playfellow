@@ -50,11 +50,14 @@ from arena_pack.tiny_kingdom import TinyKingdom
 from arena_pack.top_racer import TopRacer
 from arena_pack.turn_quest import TurnQuest
 from controls import load_card
+from nav.curriculum import CurriculumScheduler
 from nav.planner import Navigator
 from nav.practice import PackWorld, practice
+from nav.surprise import SurpriseModule
 
 HERE = Path(__file__).resolve().parent
 SEEDS = (0, 1, 2, 3, 4)
+PRACTICE_SEEDS = 5  # the curriculum spreads practice over this many training seeds (never the ladder's own seeds)
 MAX_FAILURES = 3
 AFTER_DONE_TICKS = 5  # keep the clock running after the end: the win must persist
 MAX_ACTIONS_AFTER_DONE = 2
@@ -115,10 +118,14 @@ def play_episode(level: Level, seed: int, policy: Policy, allowed: set[str], thi
             after_done += 1
         game.step(action if action and _name(action) in allowed else None)  # step() follows game.realtime
     persisted = won_at_end and game.is_won()
-    return {"seed": seed, "won": persisted, "won_at_end": won_at_end, "score": game.score, "steps": steps,
-            "seconds": round(seconds, 2), "ai_calls": getattr(policy, "ai_calls", 0),
-            "mean_step_ms": round(1000 * seconds / steps, 2) if steps else 0.0, "dropped": dropped,
-            "actions_after_done": after_done, "truncated": truncated, "progress": game.progress()}
+    episode = {"seed": seed, "won": persisted, "won_at_end": won_at_end, "score": game.score, "steps": steps,
+               "seconds": round(seconds, 2), "ai_calls": getattr(policy, "ai_calls", 0),
+               "mean_step_ms": round(1000 * seconds / steps, 2) if steps else 0.0, "dropped": dropped,
+               "actions_after_done": after_done, "truncated": truncated, "progress": game.progress()}
+    diagnostics = getattr(policy, "diagnostics", None)  # a brain that reports on itself (the Lumine agent does)
+    if callable(diagnostics):
+        episode["diagnostics"] = diagnostics()
+    return episode
 
 
 def run_ladder(make_policy: Callable[[Level, int], Policy], seeds=SEEDS, from_level: int = 1, to_level: int = 99,
@@ -134,7 +141,9 @@ def run_ladder(make_policy: Callable[[Level, int], Policy], seeds=SEEDS, from_le
             failures += not episode["won"] or episode["actions_after_done"] > MAX_ACTIONS_AFTER_DONE
             if failures >= MAX_FAILURES:
                 break
-        passed = failures < MAX_FAILURES
+        # Most of the played games must be won, as well as fewer than MAX_FAILURES lost: with fewer seeds than
+        # MAX_FAILURES a level could otherwise never fail (found 2026-10-22: 0 of 30 games won, "15/15 passed").
+        passed = failures < MAX_FAILURES and 2 * (len(episodes) - failures) > len(episodes)
         levels.append({"level": level.number, "game": level.key, "genre": level.genre, "passed": passed,
                        "wins": sum(e["won"] for e in episodes), "episodes": episodes,
                        "mean_score": round(statistics.fmean(e["score"] for e in episodes), 1),
@@ -151,7 +160,8 @@ def run_ladder(make_policy: Callable[[Level, int], Policy], seeds=SEEDS, from_le
 def render(result: dict) -> str:
     mode = f" — real-time, {result['think_ms']:g} ms per decision" if result.get("realtime") else ""
     out = [f"# Game ladder — {result['brain']}{mode} — {result['date']}", "",
-           f"Seeds {result['seeds']}; a level fails after {MAX_FAILURES} lost episodes. A win counts only if it still "
+           f"Seeds {result['seeds']}; a level passes only if most of its games are won, and fails after {MAX_FAILURES} "
+           f"lost episodes. A win counts only if it still "
            f"holds {AFTER_DONE_TICKS} ticks after the end, with at most {MAX_ACTIONS_AFTER_DONE} actions sent after it.", "",
            ("**Stopped at level %s.**" % result["stopped_at"]) if result["stopped_at"] else "**All levels passed.**", "",
            "| level | game | genre | result | wins | mean score | mean steps | actions after done (max) | dropped by card |",
@@ -224,20 +234,27 @@ class NavPolicy:
 
 def nav_policies(practice_episodes: int = 3, practice_seed: int = 100, practice_cap: int = 600,
                  max_steps: int | None = None) -> Callable[[Level, int], Policy]:
-    """Learned navigation: per level, practise on a training seed first, then play every ladder seed as a level it
-    has never seen (only looks and moves carry over)."""
+    """Learned navigation: per level, practise on training seeds first, then play every ladder seed as a level it
+    has never seen (only looks and moves carry over). Practice follows a curriculum (LEGENT / Voyager): it picks
+    the next training seed by need, learns from the navigator's own surprise, and stops early once the level is
+    mastered. `make.curricula` keeps each level's curriculum for the report."""
     practised: dict[str, Navigator] = {}
+    curricula: dict[str, CurriculumScheduler] = {}
 
     def make(level: Level, seed: int) -> Policy:
         if level.key not in practised:
             keys = sorted(k for k in level.card_keys() if k != "click") or sorted(level.card_keys())
-            navigator = Navigator(keys)
+            navigator = Navigator(keys, surprise=SurpriseModule())
             if practice_episodes and keys and keys != ["click"]:  # a click-only game has no keys to practise with
+                curricula[level.key] = curriculum = CurriculumScheduler(
+                    levels=[level.number], seeds=tuple(range(practice_seed, practice_seed + PRACTICE_SEEDS)))
                 practice(PackWorld(level.game_class(seed=practice_seed)), navigator, episodes=practice_episodes,
-                         cap=practice_cap, seed=practice_seed, save=False)
+                         cap=practice_cap, seed=practice_seed, save=False, curriculum=curriculum)
             practised[level.key] = navigator
         return NavPolicy(practised[level.key].for_new_level(), max_steps)
+    make.curricula = curricula
     return make
+
 
 
 BRAINS = {"scripted": scripted_policies, "random": random_policies, "nav": nav_policies}

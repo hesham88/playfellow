@@ -5,13 +5,18 @@ from google import genai
 from google.genai import types
 from PIL import Image
 
-from brain import REQUEST_TIMEOUT, classify_error
+from brain import ENDPOINTS, REQUEST_TIMEOUT, classify_error
+from brain.meter import begin, finish
 
 
 class GeminiBrain:
-    def __init__(self, model: str, api_key: str, is_helper: bool = False):
+    name = "gemini"
+
+    def __init__(self, model: str, api_key: str, is_helper: bool = False, meter=None):
         self.model = model
-        self.client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=REQUEST_TIMEOUT * 1000))
+        self.meter = meter  # counts each question where it is asked (brain/meter.py)
+        self.client = genai.Client(api_key=api_key, http_options=types.HttpOptions(base_url=ENDPOINTS["gemini"],
+                                                                                   timeout=REQUEST_TIMEOUT * 1000))
         self.is_helper = is_helper
 
     def ask(self, system: str, text: str, images: list[Image.Image]) -> str:
@@ -27,6 +32,7 @@ class GeminiBrain:
                 except (TypeError, AttributeError):
                     thinking_config = None
 
+        start = begin(self)
         try:
             response = self.client.models.generate_content(
                 model=self.model,
@@ -57,4 +63,10 @@ class GeminiBrain:
                     raise classify_error(retry_exc) from retry_exc
             else:
                 raise classify_error(exc) from exc
-        return response.text or ""
+        reply = response.text or ""
+        counts = getattr(response, "usage_metadata", None)
+        written = getattr(counts, "candidates_token_count", None)
+        thoughts = getattr(counts, "thoughts_token_count", None) or 0  # thinking is billed as output
+        finish(self, start, system, text, len(images), reply, prompt=getattr(counts, "prompt_token_count", None),
+               completion=None if written is None else written + thoughts)
+        return reply

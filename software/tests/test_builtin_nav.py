@@ -126,7 +126,7 @@ def test_a_moving_message_in_the_top_bar_is_not_mistaken_for_a_pickup():
     for _ in range(40):  # walk back and forth into a wall: only the message line changes, never the score
         brain._bar(frame)
         frame, *_ = world.step("left")
-    assert world.game.score == 0 and brain._bar_events == 0
+    assert world.game.score == 0 and brain.hud_bar.events == 0
 
 
 def test_make_brain_builds_it_without_a_key_and_needs_the_card():

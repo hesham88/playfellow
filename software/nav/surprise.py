@@ -214,11 +214,6 @@ class SurpriseModule:
 
         return base_surprise
 
-    def compute_entity_surprise(self, entities_before: Any, entities_after: Any) -> float:
-        """Computes standalone VTX entity diff surprise in [0.0, 1.0]."""
-        diff = compute_entity_diff(entities_before, entities_after)
-        return float(diff["diff_score"])
-
     def predict(self, state: Any, action: str) -> Any | None:
         """Returns the most likely next state given (state, action)."""
         h_state = _hashable(state)

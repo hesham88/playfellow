@@ -9,11 +9,12 @@ import urllib.request
 import ollama
 from PIL import Image
 
-from brain import LOCAL_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
+from brain import ENDPOINTS, LOCAL_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
+from brain.meter import begin, finish
 
 KEEP_ALIVE = "30m"  # default if not specified
 FIRST_CALL_TIMEOUT = 600  # seconds for first call (cold load from USB HDD)
-OLLAMA_TAGS_URL = "http://127.0.0.1:11434/api/tags"
+OLLAMA_TAGS_URL = ENDPOINTS["local"] + "/api/tags"
 PULL_HINT = "gemma3:4b"  # what to tell a player who has no Gemma model yet
 VISION_MARKERS = ("qwen2.5vl", "qwen2-vl", "llava", "minicpm-v", "llama3.2-vision")
 
@@ -63,14 +64,18 @@ def resolve_ollama_model(preferred: str, power: str, installed: list[str]) -> st
 
 
 class LocalBrain:
-    def __init__(self, model: str, keep_alive: str = KEEP_ALIVE):
+    name = "local"
+
+    def __init__(self, model: str, keep_alive: str = KEEP_ALIVE, meter=None):
         self.model = model
+        self.meter = meter  # counts each question where it is asked (brain/meter.py); local tokens are free but real
         self.keep_alive = keep_alive
         self._is_first_call = True
         # Start with long timeout for first call
-        self.client = ollama.Client(timeout=FIRST_CALL_TIMEOUT)
+        self.client = ollama.Client(host=ENDPOINTS["local"], timeout=FIRST_CALL_TIMEOUT)
 
     def ask(self, system: str, text: str, images: list[Image.Image]) -> str:
+        start = begin(self)
         try:
             response = self.client.chat(
                 model=self.model,
@@ -86,7 +91,7 @@ class LocalBrain:
             # After first successful call, switch to normal timeout
             if self._is_first_call:
                 self._is_first_call = False
-                self.client = ollama.Client(timeout=LOCAL_TIMEOUT)
+                self.client = ollama.Client(host=ENDPOINTS["local"], timeout=LOCAL_TIMEOUT)
         except ConnectionError as exc:
             raise BrainError("local_offline", retry=True, wait_seconds=5) from exc
         except Exception as exc:
@@ -103,4 +108,8 @@ class LocalBrain:
                     )
                 ) from exc
             raise classify_error(exc) from exc
-        return response["message"]["content"] or ""
+        reply = response["message"]["content"] or ""
+        # Ollama leaves prompt_eval_count out when the whole prompt was already in its cache: then 0 were read anew.
+        finish(self, start, system, text, len(images), reply, prompt=response.get("prompt_eval_count") or 0,
+               completion=response.get("eval_count"))
+        return reply

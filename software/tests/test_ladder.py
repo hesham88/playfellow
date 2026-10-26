@@ -29,6 +29,29 @@ def test_random_brain_stops_at_the_first_level_after_three_failures():
     assert not first["passed"] and len(first["episodes"]) == ladder.MAX_FAILURES and first["wins"] == 0
 
 
+def idle(level, seed):
+    return lambda game: None  # never presses anything: never wins
+
+
+@pytest.mark.parametrize("seeds", [(0,), (0, 1), (0, 1, 2, 3, 4)])
+def test_a_level_with_no_wins_never_passes_whatever_the_number_of_seeds(seeds):
+    """Found 2026-10-22: with fewer seeds than MAX_FAILURES a level could not fail, so a brain that won 0 of 30
+    games 'passed' all 15 levels. [RATCHET-LADDER-MAJORITY]"""
+    result = ladder.run_ladder(idle, seeds=seeds, from_level=4, to_level=4)
+    level = result["levels"][0]
+    assert level["wins"] == 0 and level["passed"] is False and result["stopped_at"] == 4
+
+
+def test_a_level_passes_only_when_most_of_its_games_are_won():
+    def half(level, seed):
+        return scripted(level, seed) if seed == 0 else idle(level, seed)
+
+    result = ladder.run_ladder(half, seeds=(0, 1), from_level=4, to_level=4)
+    level = result["levels"][0]
+    assert level["wins"] == 1 and level["passed"] is False  # 1 of 2 is not most
+    assert ladder.run_ladder(scripted, seeds=(0, 1), from_level=4, to_level=4)["levels"][0]["passed"] is True
+
+
 def test_from_and_to_pick_a_range_of_levels():
     result = ladder.run_ladder(scripted, seeds=(0,), from_level=5, to_level=7)
     assert [lv["level"] for lv in result["levels"]] == [5, 6, 7]
@@ -39,6 +62,8 @@ def test_keys_off_the_card_are_dropped_and_counted():
         calls = {"n": 0}
 
         def policy(game):
+            if game.done:
+                return None  # stop when done: presses after the end fail the episode (and, since 2026-10-22, the level)
             calls["n"] += 1
             return "space" if calls["n"] % 2 else SCRIPTED[level.key](game)
         return policy

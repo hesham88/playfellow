@@ -6,13 +6,17 @@ import base64
 import openai
 from PIL import Image
 
-from brain import REQUEST_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
+from brain import ENDPOINTS, REQUEST_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
+from brain.meter import begin, finish
 
 
 class OpenAIBrain:
-    def __init__(self, model: str, api_key: str):
+    name = "openai"
+
+    def __init__(self, model: str, api_key: str, meter=None):
         self.model = model
-        self.client = openai.OpenAI(api_key=api_key, timeout=REQUEST_TIMEOUT, max_retries=1)
+        self.meter = meter  # counts each question where it is asked (brain/meter.py)
+        self.client = openai.OpenAI(api_key=api_key, base_url=ENDPOINTS["openai"], timeout=REQUEST_TIMEOUT, max_retries=1)
 
     def ask(self, system: str, text: str, images: list[Image.Image]) -> str:
         content = [
@@ -23,6 +27,7 @@ class OpenAIBrain:
             for image in images
         ]
         content.append({"type": "text", "text": text})
+        start = begin(self)
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -32,6 +37,10 @@ class OpenAIBrain:
         except Exception as exc:
             raise classify_error(exc) from exc
         try:
-            return response.choices[0].message.content or ""
+            reply = response.choices[0].message.content or ""
         except (IndexError, AttributeError, TypeError) as exc:
             raise BrainError("brain_trouble", retry=True, wait_seconds=3, detail="unexpected reply from the AI") from exc
+        usage = getattr(response, "usage", None)
+        finish(self, start, system, text, len(images), reply, prompt=getattr(usage, "prompt_tokens", None),
+               completion=getattr(usage, "completion_tokens", None))
+        return reply

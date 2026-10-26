@@ -97,3 +97,10 @@ def quick_settings(**overrides):
     }
     values.update(overrides)
     return _Settings(**values)
+
+
+class MemoryKeystore(dict):
+    """Stand-in for Windows Credential Manager (keyring) in the sync tests (it lived in sync/engine.py until 2026-10-23)."""
+
+    def set(self, name, value):
+        self[name] = value

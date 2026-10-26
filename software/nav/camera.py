@@ -144,12 +144,6 @@ class CameraTracker:
         self.offset: tuple[int, int] = (0, 0)  # total background slide since the start, in pixels
         self.last: tuple[int, int, float] = (0, 0, 1.0)  # (dx, dy, confidence) of the latest step, in pixels
 
-    def estimate_shift(self, prev_frame: np.ndarray, curr_frame: np.ndarray) -> tuple[int, int, float]:
-        """(dx, dy, confidence): how far the background slid between two pictures, in pixels."""
-        cell = frames.cell_size(np.asarray(curr_frame).shape)
-        dc, dr, confidence = estimate_grid_shift(frames.shrink(prev_frame, cell), frames.shrink(curr_frame, cell))
-        return dc * cell, dr * cell, confidence
-
     def update(self, dx: int, dy: int, confidence: float) -> tuple[int, int]:
         """Take one step's estimate in; a shaky one (below SURE) is ignored. Returns the shift that was used."""
         used = (dx, dy) if confidence >= SURE else (0, 0)
@@ -165,5 +159,3 @@ class CameraTracker:
         """A screen point's address in the world (the screen point minus how far the background has slid)."""
         return point[0] - self.offset[0], point[1] - self.offset[1]
 
-    def to_screen(self, point: tuple[float, float]) -> tuple[float, float]:
-        return point[0] + self.offset[0], point[1] + self.offset[1]

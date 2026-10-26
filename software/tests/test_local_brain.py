@@ -4,7 +4,7 @@ import brain.local as local
 
 
 class FakeClient:
-    def __init__(self, timeout=None):
+    def __init__(self, host=None, timeout=None):
         self.calls = []
 
     def chat(self, **kwargs):
@@ -45,7 +45,7 @@ def test_local_brain_reports_a_missing_model(monkeypatch):
     from brain import BrainError
 
     class NotFound:
-        def __init__(self, timeout=None):
+        def __init__(self, host=None, timeout=None):
             pass
 
         def chat(self, **kwargs):
