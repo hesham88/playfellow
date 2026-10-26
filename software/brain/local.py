@@ -9,8 +9,9 @@ import urllib.request
 import ollama
 from PIL import Image
 
-from brain import ENDPOINTS, LOCAL_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
+from brain import CLIENT_ARGS, ENDPOINTS, LOCAL_OPENER, LOCAL_TIMEOUT, REPLY_SCHEMA, BrainError, classify_error, require_loopback, to_jpeg_bytes
 from brain.meter import begin, finish
+from brain.preflight import DEFAULT_CONTEXT_TOKENS, check_blocked, ensure_fits, pick_ollama
 
 KEEP_ALIVE = "30m"  # default if not specified
 FIRST_CALL_TIMEOUT = 600  # seconds for first call (cold load from USB HDD)
@@ -28,11 +29,11 @@ from brain.ollama_discovery import (
 
 def discover_ollama_models(timeout: float = 1.0, opener=None) -> list[str] | None:
     """The model names Ollama has installed, or None when Ollama is not running (an empty list means running, nothing installed)."""
-    opener = opener or urllib.request.urlopen  # looked up now, so a test can swap it
+    opener = opener or LOCAL_OPENER.open  # no proxy, no redirects; looked up now, so a test can swap it
     try:
         with opener(urllib.request.Request(OLLAMA_TAGS_URL), timeout=timeout) as response:  # always closed: no leaked socket
             data = json.loads(response.read())
-    except (urllib.error.URLError, json.JSONDecodeError, OSError, TimeoutError, ValueError):
+    except (urllib.error.URLError, json.JSONDecodeError, OSError, TimeoutError, ValueError, BrainError):
         return None
     models = data.get("models", []) if isinstance(data, dict) else []
     return [m.get("name", "") for m in models if isinstance(m, dict) and m.get("name")]
@@ -66,15 +67,54 @@ def resolve_ollama_model(preferred: str, power: str, installed: list[str]) -> st
 class LocalBrain:
     name = "local"
 
-    def __init__(self, model: str, keep_alive: str = KEEP_ALIVE, meter=None):
+    def __init__(self, model: str, keep_alive: str = KEEP_ALIVE, meter=None, host: str | None = None, structured: bool = False,
+                 memory=None, model_bytes: int | None = None, context_tokens: int = DEFAULT_CONTEXT_TOKENS, opener=None):
+        self.host = host or ENDPOINTS["local"]
+        require_loopback(self.host)  # the local brain never leaves this PC, whatever set the address (LM-2)
+        self.structured = structured  # True sends our reply schema in `format`; False keeps plain "json" as before
+        self._reads_pictures: bool | None = None
         self.model = model
+        self._memory, self.model_bytes, self.context_tokens = memory, model_bytes, context_tokens  # memory: a reader (tests fake it)
+        self._opener = opener  # for the read-only lists; None = brain.LOCAL_OPENER.open
         self.meter = meter  # counts each question where it is asked (brain/meter.py); local tokens are free but real
         self.keep_alive = keep_alive
         self._is_first_call = True
         # Start with long timeout for first call
-        self.client = ollama.Client(host=ENDPOINTS["local"], timeout=FIRST_CALL_TIMEOUT)
+        self.client = ollama.Client(host=self.host, timeout=FIRST_CALL_TIMEOUT, **CLIENT_ARGS)
+
+    def _list(self, path: str):
+        """One of Ollama's read-only lists (the model files, the running models) or None: 2 s, loopback only, no proxy, no redirect."""
+        try:
+            request = urllib.request.Request(self.host.rstrip("/") + path)
+            with (self._opener or LOCAL_OPENER.open)(request, timeout=2) as response:
+                return json.loads(response.read())
+        except BrainError:
+            raise
+        except (urllib.error.URLError, json.JSONDecodeError, OSError, TimeoutError, ValueError):
+            return None
+
+    def reads_pictures(self) -> bool | None:
+        """Whether Ollama lists "vision" in this model's capabilities (POST /api/show, https://github.com/ollama/ollama/blob/main/docs/api.md);
+        None when it cannot tell, so an older Ollama or a stopped one does not block play."""
+        if self._reads_pictures is None:
+            try:
+                capabilities = self.client.show(self.model).get("capabilities")
+            except Exception:
+                return None
+            if capabilities is not None:
+                self._reads_pictures = "vision" in capabilities
+        return self._reads_pictures
 
     def ask(self, system: str, text: str, images: list[Image.Image]) -> str:
+        # R224/D90: room for the model? Before ANY request (the first chat makes Ollama load it), read fresh on every attempt.
+        check_blocked(self.model)  # D90: by name, before ANY request
+        tags, running = self._list("/api/tags"), self._list("/api/ps")  # read-only: they load nothing; None when no answer
+        size, loaded = pick_ollama(tags, running, self.model)
+        self.found_bytes = self.model_bytes or size  # LOAD-1: the loading strip's estimate
+        ensure_fits(self.model, self.model_bytes or size, self.context_tokens, has_vision=bool(images), reader=self._memory,
+                    already_loaded=loaded)
+        if images and self.reads_pictures() is False:
+            raise BrainError("model_text_only", retry=False, detail=self.model)  # never drop the picture quietly
         start = begin(self)
         try:
             response = self.client.chat(
@@ -83,7 +123,7 @@ class LocalBrain:
                     {"role": "system", "content": system},
                     {"role": "user", "content": text, "images": [to_jpeg_bytes(image) for image in images]},
                 ],
-                format="json",
+                format=REPLY_SCHEMA if self.structured else "json",
                 think=False,  # thinking adds ~40 s per step on a laptop CPU
                 keep_alive=self.keep_alive,  # T31-C2: use the setting value
                 options={"temperature": 0.2},
@@ -91,7 +131,7 @@ class LocalBrain:
             # After first successful call, switch to normal timeout
             if self._is_first_call:
                 self._is_first_call = False
-                self.client = ollama.Client(host=ENDPOINTS["local"], timeout=LOCAL_TIMEOUT)
+                self.client = ollama.Client(host=self.host, timeout=LOCAL_TIMEOUT, **CLIENT_ARGS)
         except ConnectionError as exc:
             raise BrainError("local_offline", retry=True, wait_seconds=5) from exc
         except Exception as exc:

@@ -1,6 +1,7 @@
 """The words that tell the AI how to be a game buddy. / الكلمات التي تخبر الذكاء الاصطناعي كيف يكون رفيق لعب."""
 from __future__ import annotations
 
+from ai_armor import AIArmor
 from controls import ControlsCard, describe_card
 from settings import Settings
 
@@ -77,8 +78,18 @@ Answer with JSON only, in exactly this shape:
 {{"thought": "what I see and why I choose my move", "say": "short message to the player, or empty", "actions": ["ACTION_NAME"], "mission_update": {{"type": "none"}}, "hud": {{"Score": 20, "Coins left": 3}}, "facts": []}}{click_example}"""
 
 
+_ARMOR = AIArmor(enforce_family_safe=False)
+
+
+def redact(text: str) -> str:
+    """The player's own words, with e-mail addresses, phone numbers, cards and IPs masked, before any AI sees them."""
+    return _ARMOR.redact_pii(text, source="player")
+
+
 def turn_text(goal: str, memory_text: str, chat: list[str], captain_note: str | None, missions_text: str = "",
               sketch_notes: list[str] | None = None, hud_check_note: str | None = None) -> str:
+    chat = [redact(message) for message in chat]  # PRIV-1: a typed e-mail or phone number never reaches the cloud
+    sketch_notes = [redact(note) for note in sketch_notes or []]
     parts = []
     if missions_text:
         parts.append(missions_text)
@@ -92,7 +103,7 @@ def turn_text(goal: str, memory_text: str, chat: list[str], captain_note: str | 
     player = []
     if chat:
         player.append("The player says (answer them first):\n" + "\n".join(f"- {message}" for message in chat))
-    for note in sketch_notes or []:
+    for note in sketch_notes:
         player.append(f"The player drew on the screen (see the extra picture): {note}".rstrip())
     if player:
         parts.append("\n".join(player))

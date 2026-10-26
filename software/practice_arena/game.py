@@ -112,6 +112,7 @@ class ArenaGame:
         self.won = False
         self.moves = 0
         self.bumps = 0
+        self.game_seconds = 0.0  # the game's own clock: the sum of `dt` over step_realtime calls, never the wall clock
         self.message = self.texts["intro"]
 
     @property
@@ -158,7 +159,9 @@ class ArenaGame:
 
     def step_realtime(self, key_name: str | None = None, dt: float = 0.05, duration_ms: int = 0) -> None:
         """The same call the arena pack games have. A key press moves one tile; holding it for `duration_ms`
-        repeats the move every REPEAT_MS. `dt` is ignored: there are no hazards or timers to keep running."""
+        repeats the move every REPEAT_MS. `dt` only feeds the game clock (`game_seconds`): there are no hazards
+        or timers to keep running. The clock grows by exactly `dt` on every call, with or without a key."""
+        self.game_seconds += dt
         if not key_name:
             return
         self.press(key_name)

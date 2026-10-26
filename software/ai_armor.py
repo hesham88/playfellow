@@ -25,7 +25,34 @@ _INJECTION_PATTERNS = [
 # 2. Privacy & PII Redaction Patterns
 _EMAIL_RE = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b")
 _IPV4_RE = re.compile(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b")
-_PHONE_RE = re.compile(r"\b(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b")
+# Phone numbers (PRIV-2, PRIV-3). What counts as a phone depends on who wrote the text: the player's own words are
+# masked generously (a bare score is rare in chat), the model's and the game's text only where a number is clearly a phone.
+_SEP = r"[\s.-]?"  # the separators people type inside a number
+
+
+def _digits(first: str, more: int) -> str:
+    """`first` (a pattern for the leading digits) then `more` digits, each optionally preceded by a separator."""
+    return first + (_SEP + r"\d") * more
+
+
+_LEFT, _RIGHT = r"(?<![\w+])", r"(?!\w)"
+_INTERNATIONAL_RE = re.compile(_LEFT + r"(?:\+|00)\d(?:[\s().-]?\d){7,14}" + _RIGHT)  # +20 100 123 4567, 0020...
+_PLAYER_RE = re.compile(_LEFT + r"\(?\d(?:[\s().-]{0,2}\d){8,14}" + _RIGHT)  # any 9-15 digit run, as the player typed it
+_CLEAR_LOCAL_RE = re.compile(_LEFT + "(?:" + "|".join([
+    r"(?:\d{1,3}[-.\s])?(?:\(\d{3}\)\s?|\d{3}[-.\s])\d{3}[-.\s]\d{4}",  # US/Canada only with separators: 555-123-4567
+    _digits(r"01[0125]", 8),  # Egypt: 01001234567
+    _digits(r"05\d", 7),  # Saudi Arabia, UAE: 0501234567
+    _digits(r"07", 9),  # UK: 07911 123456
+    _digits(r"07[789]", 7),  # Jordan
+    _digits(r"0[67]", 8),  # Morocco, Algeria
+    _digits(r"07[3-9]", 8),  # Iraq
+]) + ")" + _RIGHT)
+# 8-digit mobiles (Kuwait, Qatar, Bahrain, Oman, Tunisia, Lebanon, ...) look like scores: a separator or a phone word is needed.
+_SHORT_LOCAL_RE = re.compile(_LEFT + r"(?:[2-9]\d{7}|03\d{6})" + _RIGHT + r"|" + _LEFT + r"[2-9]\d(?:[\s.-]\d{2}){3}" + _RIGHT
+                             + r"|" + _LEFT + r"\d{4}[\s.-]\d{4}" + _RIGHT)
+_PHONE_WORD_RE = re.compile(r"phone|call|number|mobile|whatsapp|tel\b|هاتف|اتصل|رقم|موبايل|جوال|واتساب", re.IGNORECASE)
+_DATE_RE = re.compile(r"^(?:19|20)\d{2}[-. ](?:0[1-9]|1[0-2])[-. ](?:0[1-9]|[12]\d|3[01])$")
+PLAYER, MODEL = "player", "model"
 _CREDIT_CARD_RE = re.compile(r"\b(?:\d{4}[-\s]?){3}\d{4}\b")
 
 # 3. Hazardous OS Hotkeys and Actions
@@ -73,16 +100,36 @@ class AIArmor:
 
         return clean.strip(), detected
 
-    def redact_pii(self, text: str) -> str:
-        """Mask personal identifiable information (emails, IPs, phones, credit cards)."""
+    def redact_pii(self, text: str, source: str = PLAYER) -> str:
+        """Mask personal identifiable information (emails, IPs, phones, credit cards).
+
+        `source` says who wrote the text. "player" (the default, so a new caller fails safe) is the player's own words:
+        any 9-15 digit run is a phone. "model" is the AI's or the game's text: only clearly formatted numbers are, so a
+        score survives. Anything else is treated as "player"."""
         if not self.redact_privacy or not text:
             return text
 
         result = _EMAIL_RE.sub("[REDACTED_EMAIL]", text)
         result = _CREDIT_CARD_RE.sub("[REDACTED_CARD]", result)
-        result = _PHONE_RE.sub("[REDACTED_PHONE]", result)
         result = _IPV4_RE.sub("[REDACTED_IP]", result)
+        result = _INTERNATIONAL_RE.sub("[REDACTED_PHONE]", result)
+        if source == MODEL:
+            result = _CLEAR_LOCAL_RE.sub("[REDACTED_PHONE]", result)
+            result = _SHORT_LOCAL_RE.sub(lambda m: self._short_phone(result, m), result)
+        else:
+            result = _PLAYER_RE.sub(lambda m: m.group(0) if _DATE_RE.match(m.group(0)) else "[REDACTED_PHONE]", result)
         return result
+
+    @staticmethod
+    def _short_phone(text: str, match: "re.Match[str]") -> str:
+        """An 8-digit number is a phone only with a separator inside it or a phone word close by (never a date)."""
+        number = match.group(0)
+        if _DATE_RE.match(number):
+            return number
+        near = text[max(0, match.start() - 30):match.end() + 30]
+        if re.search(r"[\s.-]", number) or _PHONE_WORD_RE.search(near):
+            return "[REDACTED_PHONE]"
+        return number
 
     def is_child_safe(self, text: str) -> bool:
         """Check that output text has no profanity or explicit content (the name is older than the 18+ decision)."""

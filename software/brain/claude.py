@@ -6,6 +6,11 @@ import base64
 import anthropic
 from PIL import Image
 
+try:
+    import httpx2 as sdk_httpx  # the anthropic SDK 1.14 rejects a plain httpx client (anthropic/_base_client.py:160)
+except ImportError:  # an older SDK uses httpx itself
+    import httpx as sdk_httpx
+from brain import network
 from brain import ENDPOINTS, REQUEST_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
 from brain.meter import begin, finish
 from settings import CLAUDE_FALLBACK_MODELS
@@ -14,11 +19,13 @@ from settings import CLAUDE_FALLBACK_MODELS
 class ClaudeBrain:
     name = "claude"
 
-    def __init__(self, model: str, api_key: str, meter=None):
+    def __init__(self, model: str, api_key: str, meter=None, use_proxy: bool = False):
         self.model = model
         self.meter = meter  # counts each question where it is asked (brain/meter.py)
+        # A plain httpx client with trust_env=False: anthropic.DefaultHttpxClient mounts HTTP_PROXY and friends itself
+        # (anthropic/_base_client.py:1019), whatever trust_env says [RATCHET-PINNED-ENDPOINTS]
         self.client = anthropic.Anthropic(api_key=api_key, base_url=ENDPOINTS["claude"], timeout=REQUEST_TIMEOUT,
-                                          max_retries=1)
+                                          max_retries=1, http_client=sdk_httpx.Client(**network.client_args(use_proxy)))
 
     def ask(self, system: str, text: str, images: list[Image.Image]) -> str:
         content = [

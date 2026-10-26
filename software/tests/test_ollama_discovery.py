@@ -70,7 +70,7 @@ def test_resolve_ollama_model_returns_none_when_empty():
     assert resolve_ollama_model("gemma3:4b", installed_models=[]) is None
 
 
-@patch("urllib.request.urlopen")
+@patch("brain.LOCAL_OPENER.open")  # the proxy-free, redirect-free opener every local request uses
 def test_discover_ollama_models_success(mock_urlopen):
     mock_resp = MagicMock()
     mock_resp.status = 200
@@ -84,16 +84,16 @@ def test_discover_ollama_models_success(mock_urlopen):
     mock_resp.__exit__.return_value = None
     mock_urlopen.return_value = mock_resp
 
-    online, models = discover_ollama_models(host="http://localhost:11434")
+    online, models = discover_ollama_models(host="http://127.0.0.1:11434")
     assert online is True
     assert models == ["gemma3:4b", "llama3:8b"]
 
 
-@patch("urllib.request.urlopen")
+@patch("brain.LOCAL_OPENER.open")  # the proxy-free, redirect-free opener every local request uses
 def test_discover_ollama_models_offline(mock_urlopen):
     mock_urlopen.side_effect = urllib.error.URLError("Connection refused")
 
-    online, models = discover_ollama_models(host="http://localhost:11434")
+    online, models = discover_ollama_models(host="http://127.0.0.1:11434")
     assert online is False
     assert models == []
 

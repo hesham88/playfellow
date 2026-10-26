@@ -136,7 +136,7 @@ def fake_anthropic(outcome):
     plain, beta = FakeMessages(outcome), FakeMessages(outcome)
 
     class FakeAnthropic:
-        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None):
+        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None, http_client=None):
             self.messages = plain
             self.beta = SimpleNamespace(messages=beta)
 
@@ -198,7 +198,7 @@ def test_openai_sends_data_url_and_json_mode(monkeypatch):
     seen = {}
 
     class FakeOpenAI:
-        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None):
+        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None, http_client=None):
             self.chat = SimpleNamespace(completions=SimpleNamespace(create=self.create))
 
         def create(self, **kwargs):
@@ -273,7 +273,7 @@ def test_claude_garbled_response(monkeypatch):
 
 def test_openai_empty_choices(monkeypatch):
     class FakeOpenAI:
-        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None):
+        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None, http_client=None):
             self.chat = SimpleNamespace(completions=SimpleNamespace(create=self.create))
 
         def create(self, **kwargs):
@@ -304,7 +304,7 @@ def test_claude_sets_timeout_and_max_retries(monkeypatch):
     seen = {}
 
     class FakeAnthropic:
-        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None):
+        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None, http_client=None):
             seen["timeout"] = timeout
             seen["max_retries"] = max_retries
             self.messages = FakeMessages(answer("{}"))
@@ -320,7 +320,7 @@ def test_openai_sets_timeout_and_max_retries(monkeypatch):
     seen = {}
 
     class FakeOpenAI:
-        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None):
+        def __init__(self, api_key, base_url=None, timeout=None, max_retries=None, http_client=None):
             seen["timeout"] = timeout
             seen["max_retries"] = max_retries
             self.chat = SimpleNamespace(completions=SimpleNamespace(create=lambda **kw: SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content='{}'))])))
@@ -335,7 +335,7 @@ def test_local_uses_client_with_timeout(monkeypatch):
     seen = {}
 
     class FakeOllamaClient:
-        def __init__(self, host=None, timeout=None):
+        def __init__(self, host=None, timeout=None, **kwargs):
             seen["timeout"] = timeout
 
         def chat(self, **kwargs):
@@ -351,7 +351,7 @@ def test_local_uses_client_with_timeout(monkeypatch):
 def test_local_model_not_found_gives_helpful_error(monkeypatch):
     """Task 20 §0b: Ollama 'model not found' error gives helpful message with retry=False."""
     class FakeOllamaClient:
-        def __init__(self, host=None, timeout=None):
+        def __init__(self, host=None, timeout=None, **kwargs):
             pass
 
         def chat(self, **kwargs):

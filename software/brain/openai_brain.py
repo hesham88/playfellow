@@ -4,8 +4,10 @@ from __future__ import annotations
 import base64
 
 import openai
+import httpx
 from PIL import Image
 
+from brain import network
 from brain import ENDPOINTS, REQUEST_TIMEOUT, BrainError, classify_error, to_jpeg_bytes
 from brain.meter import begin, finish
 
@@ -13,10 +15,12 @@ from brain.meter import begin, finish
 class OpenAIBrain:
     name = "openai"
 
-    def __init__(self, model: str, api_key: str, meter=None):
+    def __init__(self, model: str, api_key: str, meter=None, use_proxy: bool = False):
         self.model = model
         self.meter = meter  # counts each question where it is asked (brain/meter.py)
-        self.client = openai.OpenAI(api_key=api_key, base_url=ENDPOINTS["openai"], timeout=REQUEST_TIMEOUT, max_retries=1)
+        # A plain httpx client with trust_env=False: no HTTP_PROXY and friends, no redirects [RATCHET-PINNED-ENDPOINTS]
+        self.client = openai.OpenAI(api_key=api_key, base_url=ENDPOINTS["openai"], timeout=REQUEST_TIMEOUT, max_retries=1,
+                                    http_client=httpx.Client(**network.client_args(use_proxy)))
 
     def ask(self, system: str, text: str, images: list[Image.Image]) -> str:
         content = [

@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "playfellow"
+version = "0.1.0.dev0"
+description = "PlayFellow research core: an AI that plays your PC game with you"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = ["numpy>=2.0", "Pillow>=10.1", "PyYAML>=6.0", "mss>=9.0", "PyGetWindow>=0.0.9", "pydirectinput>=1.0.4", "pynput>=1.7", "pygame>=2.6", "keyring>=25.0", "arabic-reshaper>=3.0", "python-bidi>=0.4", "google-genai>=1.0", "anthropic", "openai", "ollama", "certifi", "httpx"]
+
+[tool.setuptools]
+package-dir = {"" = "software"}
+py-modules = ["ai_armor", "bridges", "controls", "eyes", "games", "grounding", "hands", "ladder", "memory", "messages", "play", "reply", "rtl", "safety", "settings", "timing", "titles"]
+packages = ["arena_pack", "brain", "nav", "practice_arena"]

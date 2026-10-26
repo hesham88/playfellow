@@ -15,3 +15,5 @@ google-genai>=1.0
 anthropic
 openai
 ollama
+certifi
+httpx

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import io
+import urllib.request
 from typing import Protocol
 
 from PIL import Image
@@ -20,7 +21,53 @@ ENDPOINTS = {
     "claude": "https://api.anthropic.com",
     "gemini": "https://generativelanguage.googleapis.com/",
     "local": "http://127.0.0.1:11434",
+    "lmstudio": "http://127.0.0.1:1234",  # LM Studio's OpenAI-style server (R203, D64); "Serve on Local Network" stays off
 }
+LOOPBACK_HOSTS = ("127.0.0.1", "::1")  # literals only: a hosts-file entry can point the name "localhost" anywhere
+# The reply every brain is asked for (reply.py reads it): sent to each engine's own structured-output field.
+REPLY_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "thought": {"type": "string"},
+        "say": {"type": "string"},
+        "actions": {"type": "array", "items": {}},
+    },
+    "required": ["thought", "say", "actions"],
+}
+
+
+def require_loopback(url: str) -> None:
+    """The local brains never leave this PC: any host but the literals 127.0.0.1 and ::1 is refused before a request is sent."""
+    from urllib.parse import urlsplit
+    try:
+        parts = urlsplit(url)
+        host, user = parts.hostname, parts.username
+    except ValueError:
+        host, user = None, None
+    if host == "localhost" and not user:
+        raise BrainError("local_use_ip", retry=False, detail=str(url)[:80])  # its own plain message: use the number
+    if host not in LOOPBACK_HOSTS or user:
+        raise BrainError("local_not_loopback", retry=False, detail=str(url)[:80])
+
+
+class _RefuseRedirects(urllib.request.HTTPRedirectHandler):
+    """A local engine never gets to send us anywhere else: every 3xx is refused (require_loopback only saw the first address)."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        try:
+            raise BrainError("local_not_loopback", retry=False, detail=f"redirect to {newurl}"[:80])
+        finally:
+            fp.close()  # the redirect answer still holds its connection open, even if building the error failed (LM-2g)
+
+
+# One opener for every request to a local engine. ProxyHandler({}) ignores HTTP_PROXY and friends (and the Windows proxy
+# settings), so a screenshot sent to 127.0.0.1 can never be handed to a proxy on its way [RATCHET-PINNED-ENDPOINTS].
+LOCAL_OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}), _RefuseRedirects())
+
+# The same promise for every httpx-based client (the local engines and the cloud SDKs): no HTTP_PROXY/ALL_PROXY from the
+# environment, no redirects [RATCHET-PINNED-ENDPOINTS]. A cloud brain builds its httpx client from these, and a test per
+# brain (tests/test_sec5_no_proxy.py) proves the proxy receives nothing.
+CLIENT_ARGS = {"trust_env": False, "follow_redirects": False}
 
 
 class BrainError(Exception):
@@ -120,7 +167,7 @@ class FallbackBrain:
             raise backup_error
 
 
-def make_brain(name: str, model: str, api_key: str | None, backup_model: str | None = None, is_helper: bool = False, on_event=None, clock=None, local_keep_alive: str = "30m", card=None, language: str = "english", meter=None) -> Brain:
+def make_brain(name: str, model: str, api_key: str | None, backup_model: str | None = None, is_helper: bool = False, on_event=None, clock=None, local_keep_alive: str = "30m", card=None, language: str = "english", meter=None, local_engine: str = "ollama", cloud_proxy: bool = False) -> Brain:
     """One brain, or a main brain with a lighter backup. `meter` (brain/meter.py) counts every question each AI brain
     is asked; the built-in brain is not an AI and has none."""
     if name == "builtin":  # T31-day1-brain: plays offline with no key and no model; needs the game's controls card
@@ -136,34 +183,41 @@ def make_brain(name: str, model: str, api_key: str | None, backup_model: str | N
     # Build the primary brain
     if name == "gemini":
         from brain.gemini import GeminiBrain
-        primary = GeminiBrain(model, api_key, is_helper=is_helper, meter=meter)
+        primary = GeminiBrain(model, api_key, is_helper=is_helper, meter=meter, use_proxy=cloud_proxy)
     elif name == "claude":
         from brain.claude import ClaudeBrain
-        primary = ClaudeBrain(model, api_key, meter=meter)
+        primary = ClaudeBrain(model, api_key, meter=meter, use_proxy=cloud_proxy)
     elif name == "openai":
         from brain.openai_brain import OpenAIBrain
-        primary = OpenAIBrain(model, api_key, meter=meter)
+        primary = OpenAIBrain(model, api_key, meter=meter, use_proxy=cloud_proxy)
     else:
-        from brain.local import LocalBrain
-        primary = LocalBrain(model, keep_alive=local_keep_alive, meter=meter)
+        primary = _local_brain(model, local_engine, local_keep_alive, meter)
 
     # If backup_model is specified and different from model, return a FallbackBrain
     if backup_model and backup_model != model:
         if name == "gemini":
             from brain.gemini import GeminiBrain
-            backup = GeminiBrain(backup_model, api_key, is_helper=is_helper, meter=meter)
+            backup = GeminiBrain(backup_model, api_key, is_helper=is_helper, meter=meter, use_proxy=cloud_proxy)
         elif name == "claude":
             from brain.claude import ClaudeBrain
-            backup = ClaudeBrain(backup_model, api_key, meter=meter)
+            backup = ClaudeBrain(backup_model, api_key, meter=meter, use_proxy=cloud_proxy)
         elif name == "openai":
             from brain.openai_brain import OpenAIBrain
-            backup = OpenAIBrain(backup_model, api_key, meter=meter)
+            backup = OpenAIBrain(backup_model, api_key, meter=meter, use_proxy=cloud_proxy)
         else:
-            from brain.local import LocalBrain
-            backup = LocalBrain(backup_model, keep_alive=local_keep_alive, meter=meter)
+            backup = _local_brain(backup_model, local_engine, local_keep_alive, meter)
         return FallbackBrain(primary, backup, on_event=on_event, clock=clock)
 
     return primary
+
+
+def _local_brain(model: str, engine: str, keep_alive: str, meter) -> Brain:
+    """One local brain on the engine the player chose: Ollama (the default) or LM Studio."""
+    if engine == "lmstudio":
+        from brain.lmstudio import LMStudioBrain, ttl_seconds
+        return LMStudioBrain(model, ttl_seconds=ttl_seconds(keep_alive), meter=meter)
+    from brain.local import LocalBrain
+    return LocalBrain(model, keep_alive=keep_alive, meter=meter)
 
 
 def to_jpeg_bytes(image: Image.Image, quality: int = 80) -> bytes:

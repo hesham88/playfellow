@@ -13,6 +13,8 @@ import urllib.error
 import urllib.request
 from typing import Sequence
 
+from brain import LOCAL_OPENER, BrainError, require_loopback
+
 logger = logging.getLogger("playfellow.brain.ollama_discovery")
 
 # Priority order when multiple Gemma models are found and user hasn't explicitly specified
@@ -40,13 +42,18 @@ def discover_ollama_models(
         (is_online, installed_model_names)
         Guarantees sockets are cleanly closed.
     """
+    try:
+        require_loopback(host)  # the model list is asked of this PC only
+    except BrainError as exc:
+        logger.debug("Ollama discovery refused %s: %s", host, exc)
+        return False, []
     endpoint = f"{host.rstrip('/')}/api/tags"
     req = urllib.request.Request(
         endpoint,
         headers={"User-Agent": "PlayFellow/1.0", "Accept": "application/json"},
     )
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as response:
+        with LOCAL_OPENER.open(req, timeout=timeout) as response:  # no proxy, no redirects
             if response.status != 200:
                 return False, []
             raw_body = response.read()
@@ -58,7 +65,7 @@ def discover_ollama_models(
                 if name and isinstance(name, str):
                     names.append(name.strip())
             return True, names
-    except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, OSError, TimeoutError) as exc:
+    except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, OSError, TimeoutError, BrainError) as exc:
         logger.debug("Ollama discovery unreachable at %s: %s", endpoint, exc)
         return False, []
 

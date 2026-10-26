@@ -107,3 +107,31 @@ def no_real_keyring():
 def no_real_data_folder(monkeypatch, tmp_path_factory):
     """No test writes into the real per-user data folder: the default is a temp one."""
     monkeypatch.setenv("LOCALAPPDATA", str(tmp_path_factory.mktemp("localappdata")))
+
+
+@pytest.fixture(autouse=True)
+def roomy_free_memory(monkeypatch):
+    """[RATCHET-TEST-ISOLATION-MEMORY] The memory preflight (brain/preflight.py) refuses a local model that does not fit; tests
+    about anything else must not depend on how much memory this PC happens to have free. test_lm9_preflight.py injects its own figures."""
+    import brain.preflight as preflight
+    monkeypatch.setattr(preflight, "read_ram", lambda: 64 * preflight.GIB)
+    yield
+
+
+@pytest.fixture(autouse=True)
+def no_real_local_engines(monkeypatch):
+    """[RATCHET-TEST-ISOLATION-ENGINES] No test talks to the real Ollama or LM Studio on this PC (not even a model list): the
+    pinned default endpoints answer "unreachable". A test that wants an engine passes a fake opener or its own 127.0.0.1:0 server."""
+    import urllib.error
+
+    import brain
+    real = brain.LOCAL_OPENER.open
+
+    def guarded(request, *args, **kwargs):
+        url = request.full_url if hasattr(request, "full_url") else str(request)
+        if any(url.startswith(base) for base in (brain.ENDPOINTS["local"], brain.ENDPOINTS["lmstudio"])):
+            raise urllib.error.URLError("tests never call the real local engines")
+        return real(request, *args, **kwargs)
+
+    monkeypatch.setattr(brain.LOCAL_OPENER, "open", guarded)
+    yield
